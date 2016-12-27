@@ -1,11 +1,11 @@
-package com.wordguard.ui.activities;
+package com.io.wordguard.ui.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.wordguard.R;
+import com.io.wordguard.BaseActivity;
+import com.io.wordguard.R;
 
-public class AboutActivity extends AppCompatActivity {
+public class AboutActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

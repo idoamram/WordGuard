@@ -1,4 +1,4 @@
-package com.wordguard.ui.activities;
+package com.io.wordguard.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,17 +12,18 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.wordguard.R;
-import com.wordguard.ui.adapters.TabPagerAdapter;
+import com.io.wordguard.BaseActivity;
+import com.io.wordguard.R;
+import com.io.wordguard.ui.adapters.TabPagerAdapter;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private ViewPager mViewPager;
+    public static boolean needRecreate = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,15 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (needRecreate) {
+            needRecreate = false;
+            recreate();
+        }
+    }
+
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -118,11 +128,12 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == R.id.nav_done) {
-            // Handle the camera action
+        if (id == R.id.nav_active) {
+            // Active Fragment
+        } else if (id == R.id.nav_done) {
+            // Done Fragment
         } else if (id == R.id.nav_trash) {
-
+            // Trash fragment
         } else if (id == R.id.nav_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
         } else if (id == R.id.nav_about) {

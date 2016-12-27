@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.wordguard">
+    package="com.io.wordguard">
 
     <application
+        android:name=".WordGuardApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -18,8 +19,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.SettingsActivity" />
-        <activity android:name=".ui.activities.AboutActivity"></activity>
+        <activity
+            android:name=".ui.activities.SettingsActivity"
+            android:label="@string/navigation_drawer_settings"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activities.AboutActivity"
+            android:label="@string/navigation_drawer_about"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

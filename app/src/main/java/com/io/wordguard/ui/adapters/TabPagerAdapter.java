@@ -1,12 +1,12 @@
-package com.wordguard.ui.adapters;
+package com.io.wordguard.ui.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.wordguard.ui.fragment.AllWordsFragment;
-import com.wordguard.ui.fragment.MyWordsFragment;
-import com.wordguard.ui.fragment.OthersWordsFragment;
+import com.io.wordguard.ui.fragment.AllWordsFragment;
+import com.io.wordguard.ui.fragment.MyWordsFragment;
+import com.io.wordguard.ui.fragment.OthersWordsFragment;
 
 public class TabPagerAdapter extends FragmentStatePagerAdapter {
     private int mNumOfTabs;

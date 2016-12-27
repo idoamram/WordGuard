@@ -1,4 +1,4 @@
-package com.wordguard.ui.fragment;
+package com.io.wordguard.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wordguard.R;
+import com.io.wordguard.R;
 
 public class OthersWordsFragment extends Fragment {
 
