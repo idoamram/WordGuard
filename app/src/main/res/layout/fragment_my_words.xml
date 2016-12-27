@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.wordguard.ui.fragment.MyWordsFragment">
+    tools:context=".ui.fragment.MyWordsFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_words_recyclerView"

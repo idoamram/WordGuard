@@ -84,4 +84,13 @@
         <item>@string/color_blue</item>
         <item>@string/color_purple</item>
     </string-array>
+
+    <!--Strings related to About-->
+    <string name="about_version">Version %1$s (%2$s)</string>
+    <string name="about_libraries_heading">Libraries used</string>
+    <string name="libraries_list" translatable="false"><a href="https://android.googlesource.com/platform/frameworks/support/">Android Support Libraries</a>, <a href="https://github.com/bumptech/glide">Glide</a>, <a href="https://github.com/sjwall/MaterialTapTargetPrompt">MaterialTapTargetPrompt</a>"</string>
+    <string name="about_app_license_heading">License</string>
+    <string name="about_app_license">Source code available on &lt;a href=\"https://github.com/idoamram/WordGuard\">GitHub&lt;/a> under the &lt;a href=\"http://www.apache.org/licenses/LICENSE-2.0\">Apache 2.0 License&lt;/a>.</string>
+    <string name="about_rate_app">Rate the App</string>
+    <string name="about_io">Ido Amram and Or Ego are awesome Android developers!</string>
 </resources>
