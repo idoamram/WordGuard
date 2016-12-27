@@ -23,6 +23,6 @@ public class ThemeUtils {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
                 break;
         }
-        appCompatActivity.getDelegate().applyDayNight();
+//        appCompatActivity.getDelegate().applyDayNight();
     }
 }
