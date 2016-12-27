@@ -22,11 +22,21 @@
         <activity
             android:name=".ui.activities.SettingsActivity"
             android:label="@string/navigation_drawer_settings"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:parentActivityName=".ui.activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.MainActivity" />
+        </activity>
         <activity
             android:name=".ui.activities.AboutActivity"
             android:label="@string/navigation_drawer_about"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:parentActivityName=".ui.activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
