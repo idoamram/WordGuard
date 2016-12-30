@@ -20,9 +20,6 @@
     <!-- Strings related to Settings -->
     <string name="pref_personalization_category">Personalization</string>
     <string name="pref_general_category">General</string>
-    <string name="pref_language_title">Language</string>
-    <string name="language_english">English</string>
-    <string name="language_hebrew">Hebrew</string>
     <string name="night_mode_title">Theme</string>
     <string name="night_mode_no">Light</string>
     <string name="night_mode_yes">Dark</string>
@@ -43,14 +40,6 @@
     <string name="color_blue">Blue</string>
     <string name="color_purple">Purple</string>
     <string name="pref_restart_required">Application restart is required to apply the changes</string>
-    <string-array name="language_entries" translatable="false">
-        <item name="iw">@string/language_hebrew</item>
-        <item name="en">@string/language_english</item>
-    </string-array>
-    <string-array name="language_values" translatable="false">
-        <item name="iw">iw</item>
-        <item name="en">en</item>
-    </string-array>
     <string-array name="night_mode_entries" translatable="false">
         <item>@string/night_mode_no</item>
         <item>@string/night_mode_yes</item>
