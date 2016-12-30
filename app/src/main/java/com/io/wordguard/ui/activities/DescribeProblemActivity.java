@@ -5,7 +5,6 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,8 +20,6 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.format.Formatter;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -83,7 +80,7 @@ public class DescribeProblemActivity extends BaseActivity {
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.screenshots);
         linearLayout.removeAllViews();
         for (int i = 0; i < 3; i++) {
-            ImageView imageView = new ImageView(this);
+            final ImageView imageView = new ImageView(this);
             imageView.setScaleType(ImageView.ScaleType.CENTER);
             imageView.setImageResource(R.drawable.ic_add_48dp);
             imageView.setBackgroundResource(R.drawable.inline_screenshot_placeholder);
@@ -92,17 +89,20 @@ public class DescribeProblemActivity extends BaseActivity {
             }
             imageView.setOnClickListener(new screenshotClickListener(i));
             imageView.setOnLongClickListener(new screenshotClickListener(i));
-            DisplayMetrics displaymetrics = new DisplayMetrics();
-            getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-            int screenWidth = displaymetrics.widthPixels;
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
             int margin = getResources().getDimensionPixelSize(R.dimen.medium_thumbnail_padding);
-            int imageViewWidth =  (screenWidth - dp2px(36) - (margin * 6)) / 3;
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, (imageViewWidth * 4) / 3, 1.0f);
             layoutParams.bottomMargin = margin;
             layoutParams.rightMargin = margin;
             layoutParams.topMargin = margin;
             layoutParams.leftMargin = margin;
             linearLayout.addView(imageView, layoutParams);
+            // change image view height after width is set
+            imageView.post(new Runnable() {
+                @Override
+                public void run() {
+                    imageView.getLayoutParams().height = (imageView.getWidth() * 4) / 3;
+                }
+            });
             // save image view for later use
             screenshots[i] = imageView;
         }
@@ -303,10 +303,6 @@ public class DescribeProblemActivity extends BaseActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArray("screenshots", uris);
-    }
-
-    public static int dp2px(int dp) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, Resources.getSystem().getDisplayMetrics());
     }
 
     public Drawable getSelectedItemDrawable() {
