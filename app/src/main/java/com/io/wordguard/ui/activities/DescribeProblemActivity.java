@@ -101,6 +101,7 @@ public class DescribeProblemActivity extends BaseActivity {
                 @Override
                 public void run() {
                     imageView.getLayoutParams().height = (imageView.getWidth() * 4) / 3;
+                    imageView.requestLayout();
                 }
             });
             // save image view for later use
