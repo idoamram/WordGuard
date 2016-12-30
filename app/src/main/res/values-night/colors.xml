@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--Material Design Color Parameters-->
+    <color name="primary_text_color">@color/material_dark_primary_text</color>
+    <color name="primary_text_color_inverse">@color/material_light_secondary_text</color>
+    <color name="secondary_text_color">@color/material_dark_secondary_text</color>
+    <color name="secondary_text_color_inverse">@color/material_light_secondary_text</color>
+    <color name="disabled_color">@color/material_dark_disabled</color>
     <color name="divider_color">@color/material_dark_dividers</color>
+    <color name="active_icon_color">@color/material_dark_active_icon</color>
+    <color name="inactive_icon_color">@color/material_dark_inactive_icon</color>
+    <color name="cards_and_dialogs_color">@color/material_dark_cards_and_dialogs</color>
+    <color name="bottom_sheet_color">@color/material_dark_cards_and_dialogs</color>
+    <color name="background_color">@color/material_dark_background</color>
+    <color name="button_color">@color/material_button_dark</color>
+    <color name="search_plate_hint_text_color">@color/material_dark_hint_text</color>
+    <color name="ripple_color">@color/material_ripple_dark</color>
+    <color name="placeholder_background">#324248</color>
 </resources>

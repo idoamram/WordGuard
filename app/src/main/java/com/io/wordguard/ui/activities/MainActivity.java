@@ -3,6 +3,7 @@ package com.io.wordguard.ui.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -15,10 +16,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 import com.io.wordguard.BaseActivity;
 import com.io.wordguard.R;
 import com.io.wordguard.ui.adapters.TabPagerAdapter;
+import com.io.wordguard.ui.util.ThemeUtils;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -41,7 +44,17 @@ public class MainActivity extends BaseActivity
             }
         });
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appBar);
+
+        TabLayout tabLayout = new TabLayout(appBarLayout.getContext());
+        TabLayout.LayoutParams layoutParams = new TabLayout.LayoutParams(
+                TabLayout.LayoutParams.MATCH_PARENT,
+                TabLayout.LayoutParams.WRAP_CONTENT);
+        tabLayout.setBackgroundColor(ThemeUtils.getThemeColor(this, R.color.colorPrimary));
+        tabLayout.setLayoutParams(layoutParams);
+
+        appBarLayout.addView(tabLayout);
+
         tabLayout.addTab(tabLayout.newTab().setText(R.string.my_words));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.others_words));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.all_words));
@@ -136,6 +149,8 @@ public class MainActivity extends BaseActivity
             // Trash fragment
         } else if (id == R.id.nav_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
+        } else if (id == R.id.nav_describe_problem) {
+            startActivity(new Intent(this, DescribeProblemActivity.class));
         } else if (id == R.id.nav_about) {
             startActivity(new Intent(this, AboutActivity.class));
         }

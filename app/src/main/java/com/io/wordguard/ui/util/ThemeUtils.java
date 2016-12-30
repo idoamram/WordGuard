@@ -1,6 +1,9 @@
 package com.io.wordguard.ui.util;
 
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
@@ -24,5 +27,13 @@ public class ThemeUtils {
                 break;
         }
 //        appCompatActivity.getDelegate().applyDayNight();
+    }
+
+    public static int getThemeColor(Context context, int id) {
+        Resources.Theme theme = context.getTheme();
+        TypedArray a = theme.obtainStyledAttributes(new int[]{id});
+        int result = a.getColor(0, 0);
+        a.recycle();
+        return result;
     }
 }

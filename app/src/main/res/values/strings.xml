@@ -93,4 +93,17 @@
     <string name="about_app_license">Source code available on &lt;a href=\"https://github.com/idoamram/WordGuard\">GitHub&lt;/a> under the &lt;a href=\"http://www.apache.org/licenses/LICENSE-2.0\">Apache 2.0 License&lt;/a>.</string>
     <string name="about_rate_app">Rate the App</string>
     <string name="about_io">Ido Amram and Or Ego are awesome Android developers!</string>
+
+    <!--Strings related to Describe Problem-->
+    <string name="describe_problem_screenshots">Add screenshots (optional):</string>
+    <string name="describe_problem_description">Please describe your problem</string>
+    <string name="describe_problem_description_further">Please further describe your problem.</string>
+    <string name="describe_problem_include_logs">Include logs</string>
+    <string name="mail_subject">Feedback/Bug Report</string>
+    <string name="contact_support_via">Contact support via…</string>
+    <string name="no_supported_mail_apps">Unable to find installed application to send an email.</string>
+    <string name="error_load_image">"Couldn't load this photo. Please try again."</string>
+    <string name="screenshot_removed">Screenshot removed</string>
+    <string name="permission_storage_rationale">Storage permission is required to show media picker</string>
+    <string name="next">Next</string>
 </resources>

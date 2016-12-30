@@ -24,6 +24,10 @@
             android:icon="@drawable/ic_drawer_settings"
             android:title="@string/navigation_drawer_settings" />
         <item
+            android:id="@+id/nav_describe_problem"
+            android:icon="@drawable/ic_drawer_feedback"
+            android:title="@string/mail_subject" />
+        <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_drawer_about"
             android:title="@string/navigation_drawer_about" />
