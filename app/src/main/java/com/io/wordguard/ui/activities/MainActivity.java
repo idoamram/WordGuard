@@ -58,7 +58,8 @@ public class MainActivity extends BaseActivity
 
         if (savedInstanceState != null) {
             // Restore previous title
-            setTitle(savedInstanceState.getCharSequence(PREV_TITLE));
+            mTitle = savedInstanceState.getCharSequence(PREV_TITLE);
+            setTitle(mTitle);
         } else {
             // No data saved, select the default drawer item (active)
             onNavigationItemSelected(mNavigationView.getMenu().findItem(R.id.nav_active));
