@@ -3,11 +3,10 @@ package com.io.wordguard.ui.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,16 +15,18 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.io.wordguard.BaseActivity;
 import com.io.wordguard.R;
-import com.io.wordguard.ui.adapters.TabPagerAdapter;
-import com.io.wordguard.ui.util.ThemeUtils;
+import com.io.wordguard.ui.fragment.ActiveFragment;
+import com.io.wordguard.ui.fragment.DoneFragment;
+import com.io.wordguard.ui.fragment.TrashFragment;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private ViewPager mViewPager;
+    private DrawerLayout mDrawerLayout;
+    private NavigationView mNavigationView;
     public static boolean needRecreate = false;
 
     @Override
@@ -44,52 +45,20 @@ public class MainActivity extends BaseActivity
             }
         });
 
-        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appBar);
-
-        TabLayout tabLayout = new TabLayout(appBarLayout.getContext());
-        TabLayout.LayoutParams layoutParams = new TabLayout.LayoutParams(
-                TabLayout.LayoutParams.MATCH_PARENT,
-                TabLayout.LayoutParams.WRAP_CONTENT);
-        tabLayout.setBackgroundColor(ThemeUtils.getThemeColor(this, R.color.colorPrimary));
-        tabLayout.setLayoutParams(layoutParams);
-
-        appBarLayout.addView(tabLayout);
-
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.my_words));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.others_words));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.all_words));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
-        mViewPager = (ViewPager) findViewById(R.id.viewPager);
-        TabPagerAdapter adapter = new TabPagerAdapter
-                (getSupportFragmentManager(), tabLayout.getTabCount());
-        mViewPager.setAdapter(adapter);
-        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                mViewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
+                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        mNavigationView.setNavigationItemSelectedListener(this);
+
+        if (savedInstanceState == null) {
+            // No data saved, select the default drawer item (active)
+            onNavigationItemSelected(mNavigationView.getMenu().findItem(R.id.nav_active));
+            mNavigationView.setCheckedItem(R.id.nav_active);
+        }
     }
 
     @Override
@@ -101,13 +70,33 @@ public class MainActivity extends BaseActivity
         }
     }
 
+    long lastPress;
+
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        // On back key pressed
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            // If drawer is opened, close it
+            mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            // Drawer is closed, check if current fragment is active fragment, and change to it if it's not
+            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.content_frame);
+            if (currentFragment instanceof ActiveFragment) {
+                // Current fragment is active fragment, safe check before exiting the app,
+                // back key should be pressed twice in a range of 3 seconds
+                long currentTime = System.currentTimeMillis();
+                if (currentTime - lastPress > 3000) {
+                    Toast.makeText(this, R.string.confirm_exit, Toast.LENGTH_SHORT).show();
+                    lastPress = currentTime;
+                } else {
+                    super.onBackPressed();
+                }
+            } else {
+                // Current fragment is not active fragment, change back to it before exit
+                mNavigationView.setNavigationItemSelectedListener(this);
+                onNavigationItemSelected(mNavigationView.getMenu().findItem(R.id.nav_active));
+                mNavigationView.setCheckedItem(R.id.nav_active);
+            }
         }
     }
 
@@ -141,12 +130,13 @@ public class MainActivity extends BaseActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         if (id == R.id.nav_active) {
-            // Active Fragment
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new ActiveFragment()).commit();
         } else if (id == R.id.nav_done) {
-            // Done Fragment
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new DoneFragment()).commit();
         } else if (id == R.id.nav_trash) {
-            // Trash fragment
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new TrashFragment()).commit();
         } else if (id == R.id.nav_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
         } else if (id == R.id.nav_describe_problem) {
