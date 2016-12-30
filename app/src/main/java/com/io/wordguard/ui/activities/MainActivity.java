@@ -27,6 +27,8 @@ public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
+    private CharSequence mTitle;
+    private static final String PREV_TITLE = "title";
     public static boolean needRecreate = false;
 
     @Override
@@ -54,11 +56,20 @@ public class MainActivity extends BaseActivity
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         mNavigationView.setNavigationItemSelectedListener(this);
 
-        if (savedInstanceState == null) {
+        if (savedInstanceState != null) {
+            // Restore previous title
+            setTitle(savedInstanceState.getCharSequence(PREV_TITLE));
+        } else {
             // No data saved, select the default drawer item (active)
             onNavigationItemSelected(mNavigationView.getMenu().findItem(R.id.nav_active));
             mNavigationView.setCheckedItem(R.id.nav_active);
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putCharSequence(PREV_TITLE, mTitle);
     }
 
     @Override
@@ -143,6 +154,11 @@ public class MainActivity extends BaseActivity
             startActivity(new Intent(this, DescribeProblemActivity.class));
         } else if (id == R.id.nav_about) {
             startActivity(new Intent(this, AboutActivity.class));
+        }
+        // Set title only to fragments
+        if (id != R.id.nav_settings && id != R.id.nav_describe_problem && id != R.id.nav_about) {
+            setTitle(item.getTitle());
+            mTitle = item.getTitle();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
