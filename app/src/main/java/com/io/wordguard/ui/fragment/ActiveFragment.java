@@ -32,8 +32,8 @@ public class ActiveFragment extends Fragment {
 
         mAppBarLayout.addView(tabLayout);
 
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.my_words));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.others_words));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.private_words));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.public_words));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.all_words));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 

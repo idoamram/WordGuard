@@ -6,8 +6,8 @@
 
     <string name="confirm_exit">Press back again to exit.</string>
 
-    <string name="my_words">My</string>
-    <string name="others_words">Others</string>
+    <string name="private_words">Me</string>
+    <string name="public_words">Others</string>
     <string name="all_words">All</string>
 
     <string name="navigation_drawer_active">Active</string>

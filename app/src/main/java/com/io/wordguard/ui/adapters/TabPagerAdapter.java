@@ -5,8 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.io.wordguard.ui.fragment.AllWordsFragment;
-import com.io.wordguard.ui.fragment.MyWordsFragment;
-import com.io.wordguard.ui.fragment.OthersWordsFragment;
+import com.io.wordguard.ui.fragment.PrivateWordsFragment;
+import com.io.wordguard.ui.fragment.PublicWordsFragment;
 
 public class TabPagerAdapter extends FragmentStatePagerAdapter {
     private int mNumOfTabs;
@@ -21,9 +21,9 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                return new MyWordsFragment();
+                return new PrivateWordsFragment();
             case 1:
-                return new OthersWordsFragment();
+                return new PublicWordsFragment();
             case 2:
                 return new AllWordsFragment();
             default:

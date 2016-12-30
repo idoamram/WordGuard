@@ -3,10 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.fragment.OthersWordsFragment">
+    tools:context=".ui.fragment.PrivateWordsFragment">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/others_words_recyclerView"
+        android:id="@+id/my_words_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
