@@ -1,12 +1,16 @@
 package com.io.wordguard.ui.activities;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,6 +26,8 @@ import com.io.wordguard.R;
 import com.io.wordguard.ui.fragment.ActiveFragment;
 import com.io.wordguard.ui.fragment.DoneFragment;
 import com.io.wordguard.ui.fragment.TrashFragment;
+import com.io.wordguard.ui.transitions.FabTransform;
+import com.io.wordguard.ui.util.ThemeUtils;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -30,6 +36,7 @@ public class MainActivity extends BaseActivity
     private CharSequence mTitle;
     private static final String PREV_TITLE = "title";
     public static boolean needRecreate = false;
+    private static final int RC_ADD_WORD = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +45,20 @@ public class MainActivity extends BaseActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Intent intent = new Intent(MainActivity.this, AddWordActivity.class);
+                    FabTransform.addExtras(intent, ThemeUtils.getThemeColor(
+                            MainActivity.this, R.color.colorAccent), R.drawable.ic_add);
+                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation
+                            (MainActivity.this, fab, getString(R.string.transition_add_word));
+                    startActivityForResult(intent, RC_ADD_WORD, options.toBundle());
+                } else {
+                    startActivity(new Intent(MainActivity.this, AddWordActivity.class));
+                }
             }
         });
 
