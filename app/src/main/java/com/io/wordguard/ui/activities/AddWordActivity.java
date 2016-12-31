@@ -33,7 +33,7 @@ public class AddWordActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if (!FabTransform.setup(this, mContainer)) {
                 MorphTransform.setup(this, mContainer,
-                        ContextCompat.getColor(this, R.color.material_light_background),
+                        ContextCompat.getColor(this, R.color.cards_and_dialogs_color),
                         getResources().getDimensionPixelSize(R.dimen.dialog_corners));
             }
         }

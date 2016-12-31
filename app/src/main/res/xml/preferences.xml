@@ -4,7 +4,7 @@
             android:defaultValue="light"
             android:entries="@array/night_mode_entries"
             android:entryValues="@array/night_mode_values"
-            android:key="THEME"
+            android:key="theme"
             android:summary="%s"
             android:title="@string/night_mode_title" />
     </PreferenceCategory>
