@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.Build;
 import android.util.Base64;
+import android.util.Log;
 
 import java.io.File;
 import java.security.MessageDigest;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class WordGuardApplication extends Application {
-    private static final String SIGNATURE = ""; // TODO: update it to correct signature
+    private static final String SIGNATURE = "";
 
     @Override
     public void onCreate() {
@@ -45,6 +46,8 @@ public class WordGuardApplication extends Application {
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
                 String currentSignature = Base64.encodeToString(md.digest(), Base64.NO_WRAP);
+                // TODO: update SIGNATURE value and remove this log line
+                Log.d("REMOVE_ME", "Include this string as a value for SIGNATURE:" + currentSignature);
                 // Compare signatures
                 if (SIGNATURE.equals(currentSignature)) {
                     return true;

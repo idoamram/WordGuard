@@ -21,7 +21,9 @@
         android:paddingEnd="@dimen/padding_dialog"
         android:paddingStart="@dimen/padding_normal"
         android:paddingTop="@dimen/padding_dialog"
-        android:transitionName="@string/transition_add_word">
+        android:transitionName="@string/transition_add_word"
+        android:paddingRight="@dimen/padding_dialog"
+        android:paddingLeft="@dimen/padding_normal">
 
         <TextView
             android:id="@+id/dialog_title"
@@ -30,13 +32,15 @@
             android:layout_marginBottom="@dimen/dialog_title_spacing"
             android:layout_marginStart="@dimen/spacing_normal"
             android:text="@string/add_word"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_marginLeft="@dimen/spacing_normal" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/float_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_micro">
+            android:layout_marginStart="@dimen/spacing_micro"
+            android:layout_marginLeft="@dimen/spacing_micro">
 
             <AutoCompleteTextView
                 android:id="@+id/description"
