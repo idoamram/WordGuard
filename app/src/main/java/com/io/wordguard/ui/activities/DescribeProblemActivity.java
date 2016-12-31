@@ -18,6 +18,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.text.format.Formatter;
 import android.view.Gravity;
@@ -46,6 +47,10 @@ import java.util.List;
 import java.util.Locale;
 
 public class DescribeProblemActivity extends BaseActivity {
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
+
     private static final int REQUEST_STORAGE = 0;
     private ImageView[] screenshots = new ImageView[3];
     private Uri[] uris = new Uri[3];
@@ -330,7 +335,7 @@ public class DescribeProblemActivity extends BaseActivity {
         } else {
             debugInfo += "\n Free Space Built-In: Unavailable";
         }
-        if (filesDirs[1] != null) {
+        if (filesDirs.length > 1) {
             long freeBytesExternal = new StatFs(filesDirs[1].getPath()).getAvailableBytes();
             debugInfo += "\n Free Space Removable: " + freeBytesExternal + " (" + Formatter.formatFileSize(this, freeBytesExternal) + ")";
         } else {
