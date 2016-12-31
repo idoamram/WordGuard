@@ -330,13 +330,27 @@ public class DescribeProblemActivity extends BaseActivity {
         debugInfo += "\n Rooted: " + (WordGuardApplication.isRooted() ? "yes" : "no");
         File[] filesDirs = ContextCompat.getExternalFilesDirs(this, null);
         if (filesDirs[0] != null) {
-            long freeBytesInternal = new StatFs(filesDirs[0].getPath()).getAvailableBytes();
+            StatFs statFs = new StatFs(filesDirs[0].getPath());
+            long freeBytesInternal;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                freeBytesInternal = statFs.getAvailableBytes();
+            } else {
+                //noinspection deprecation
+                freeBytesInternal = statFs.getBlockSize() * statFs.getAvailableBlocks();
+            }
             debugInfo += "\n Free Space Built-In: " + freeBytesInternal + " (" + Formatter.formatFileSize(this, freeBytesInternal) + ")";
         } else {
             debugInfo += "\n Free Space Built-In: Unavailable";
         }
         if (filesDirs.length > 1) {
-            long freeBytesExternal = new StatFs(filesDirs[1].getPath()).getAvailableBytes();
+            StatFs statFs = new StatFs(filesDirs[1].getPath());
+            long freeBytesExternal;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                freeBytesExternal = statFs.getAvailableBytes();
+            } else {
+                //noinspection deprecation
+                freeBytesExternal = statFs.getBlockSize() * statFs.getAvailableBlocks();
+            }
             debugInfo += "\n Free Space Removable: " + freeBytesExternal + " (" + Formatter.formatFileSize(this, freeBytesExternal) + ")";
         } else {
             debugInfo += "\n Free Space Removable: Unavailable";
