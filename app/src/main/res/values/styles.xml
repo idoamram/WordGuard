@@ -26,7 +26,10 @@
     <style name="AddButton" parent="Theme.AppCompat">
         <item name="colorButtonNormal">@color/add_word_button</item>
         <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/material_ripple_light</item>
     </style>
+
+    <style name="DeadlineSpinner" parent="@android:style/Widget.Holo.Light.Spinner" />
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

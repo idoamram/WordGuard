@@ -10,9 +10,10 @@
     <string name="public_words">Others</string>
     <string name="all_words">All</string>
 
-    <string name="add_word">Add Word</string>
+    <string name="add_word">Add word</string>
     <string name="description">Description</string>
     <string name="add">Add</string>
+    <string name="deadline">Deadline</string>
 
     <string name="navigation_drawer_active">Active</string>
     <string name="navigation_drawer_done">Done</string>
