@@ -60,6 +60,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activities.MainActivity" />
         </activity>
-    </application>
 
+        <meta-data android:name="DATABASE_NAME" android:value="word_guard_db" />
+        <meta-data android:name="DATABASE_VERSION" android:value="1" />
+        <meta-data android:name="CONFIG_CLASS" android:value="com.io.wordguard.db.Configs" />
+        <meta-data android:name="ENTITIES_CLASSES_NAME" android:value="com.io.wordguard.db.entities.Word" />
+
+    </application>
 </manifest>
