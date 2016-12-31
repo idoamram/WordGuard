@@ -1,7 +1,11 @@
 package com.io.wordguard.ui.fragment;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -10,12 +14,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.io.wordguard.R;
+import com.io.wordguard.ui.activities.AddWordActivity;
+import com.io.wordguard.ui.activities.MainActivity;
 import com.io.wordguard.ui.adapters.TabPagerAdapter;
+import com.io.wordguard.ui.transitions.FabTransform;
 import com.io.wordguard.ui.util.ThemeUtils;
 
 public class ActiveFragment extends Fragment {
     private AppBarLayout mAppBarLayout;
     private ViewPager mViewPager;
+    private FloatingActionButton mFab;
+    private static final int RC_ADD_WORD = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,6 +65,23 @@ public class ActiveFragment extends Fragment {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
+            }
+        });
+
+        mFab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Intent intent = new Intent(getActivity(), AddWordActivity.class);
+                    FabTransform.addExtras(intent, ThemeUtils.getThemeColor(
+                            getActivity(), R.color.colorAccent), R.drawable.ic_add);
+                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation
+                            (getActivity(), mFab, getString(R.string.transition_add_word));
+                    startActivityForResult(intent, RC_ADD_WORD, options.toBundle());
+                } else {
+                    startActivity(new Intent(getActivity(), AddWordActivity.class));
+                }
             }
         });
         return rootView;
