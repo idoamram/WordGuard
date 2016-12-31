@@ -53,9 +53,6 @@ class Word extends DBObject {
     @Column(name = COL_DEAD_LINE)
     private Date deadLine;
 
-//    @ForeignKey(valueColumnName = COL_ID, fkColumnName = Contact.COL_WORD_ID, entityClass = Contact.class)
-//    private Contact contact;
-
     @Column(name = COL_ATTACHMENT)
     private String attachment;
 
