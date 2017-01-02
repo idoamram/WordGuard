@@ -10,6 +10,8 @@ public class DateHelper {
 
     private static final String DATE_FORMAT = "dd/MM/yy hh:mm";
 
+    public static final String DATE_FORMAT_ONLY_TIME = "hh:mm";
+
     public static Date stringToDate(String string) {
         if (string != null) {
             DateFormat format = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
@@ -27,6 +29,18 @@ public class DateHelper {
         if (date != null) {
             try {
                 DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
+                return dateFormat.format(date);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "";
+            }
+        } else return "";
+    }
+
+    public static String dateToString(Date date, String format) {
+        if (date != null) {
+            try {
+                DateFormat dateFormat = new SimpleDateFormat(format, Locale.getDefault());
                 return dateFormat.format(date);
             } catch (Exception e) {
                 e.printStackTrace();
