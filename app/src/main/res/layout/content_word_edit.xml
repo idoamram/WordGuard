@@ -45,6 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/flat_spinner_bg"
+                    android:minHeight="48dp"
                     android:popupBackground="@drawable/dialog_background"
                     android:spinnerMode="dropdown" />
             </LinearLayout>
@@ -170,6 +171,8 @@
                     android:focusable="false"
                     android:foreground="?selectableItemBackground"
                     android:hint="@string/deadline"
+                    android:longClickable="false"
+                    android:minHeight="48dp"
                     android:textAppearance="@android:style/TextAppearance.Medium"
                     android:textColor="?android:textColorPrimary"
                     android:textColorHint="?android:textColorPrimary" />
