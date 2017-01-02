@@ -15,6 +15,7 @@
     <string name="add">Add</string>
     <string name="deadline">Deadline</string>
     <string name="type">Type</string>
+    <string name="add_as_word">Add as word</string>
 
     <string name="navigation_drawer_active">Active</string>
     <string name="navigation_drawer_done">Done</string>
@@ -26,6 +27,7 @@
     <!-- Strings related to Settings -->
     <string name="pref_personalization_category">Personalization</string>
     <string name="pref_general_category">General</string>
+    <string name="go_premium">Go premium</string>
     <string name="night_mode_title">Theme</string>
     <string name="night_mode_no">Light</string>
     <string name="night_mode_yes">Dark</string>

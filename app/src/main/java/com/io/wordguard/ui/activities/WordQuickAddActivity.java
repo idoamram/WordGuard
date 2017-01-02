@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatSpinner;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -15,9 +14,11 @@ import android.text.format.DateFormat;
 import android.transition.TransitionManager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.io.wordguard.R;
@@ -30,12 +31,11 @@ import java.util.Date;
 public class WordQuickAddActivity extends AppCompatActivity {
     private ViewGroup mContainer;
     private AutoCompleteTextView mTitle;
-    private Button mAdd;
+    private Button mAddBtn;
     private Calendar mCalendar;
     private TextView mDeadline;
-    private AppCompatSpinner mTypeSpinner;
+    private Spinner mTypeSpinner;
     private long mDeadlineLong;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +52,13 @@ public class WordQuickAddActivity extends AppCompatActivity {
             }
         }
 
-        mTypeSpinner = (AppCompatSpinner) findViewById(R.id.add_word_type_spinner);
+        mTypeSpinner = (Spinner) findViewById(R.id.add_word_type_spinner);
+        ArrayAdapter<CharSequence> wordTypeAdapter = ArrayAdapter.createFromResource(this,
+                R.array.word_types, R.layout.spinner_item);
+        wordTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mTypeSpinner.setAdapter(wordTypeAdapter);
 
-        mAdd = (Button) findViewById(R.id.add);
+        mAddBtn = (Button) findViewById(R.id.add_word_btn_add);
         Button btnMoreFields = (Button) findViewById(R.id.add_word_btn_more_fields);
         btnMoreFields.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +90,7 @@ public class WordQuickAddActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                mAdd.setEnabled(isDescriptionValid());
+                mAddBtn.setEnabled(isDescriptionValid());
             }
         });
 

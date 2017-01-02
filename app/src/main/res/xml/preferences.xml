@@ -1,4 +1,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/pref_general_category">
+        <Preference
+            android:key="premium"
+            android:title="@string/go_premium" />
+    </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_personalization_category">
         <ListPreference
             android:defaultValue="light"
