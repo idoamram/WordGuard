@@ -29,10 +29,10 @@ public class Word extends DBObject implements Parcelable{
     private static final String COL_DESCRIPTION = "description";
     private static final String COL_TYPE = "type";
     private static final String COL_CREATION_TIME = "creation_time";
-    private static final String COL_DEAD_LINE = "dead_line";
+    public static final String COL_DEAD_LINE = "dead_line";
     private static final String COL_CONTACT_ID = "contact_id";
     private static final String COL_CONTACT_NAME = "contact_name";
-    private static final String COL_CONTACT_NUMBER = "contact_number";
+    private static final String COL_CONTACT_PHONE_NUMBER = "contact_phone_number";
     private static final String COL_CONTACT_EMAIL = "contact_email";
     private static final String COL_STATUS = "status";
     private static final String COL_LONGITUDE = "longitude";
@@ -69,17 +69,17 @@ public class Word extends DBObject implements Parcelable{
     @Column(name = COL_CONTACT_NAME)
     private String contactName;
 
-    @Column(name = COL_CONTACT_NUMBER)
-    private String contactNumber;
+    @Column(name = COL_CONTACT_PHONE_NUMBER)
+    private String contactPhoneNumber;
 
     @Column(name = COL_CONTACT_EMAIL)
     private String contactEmail;
 
     @Column(name = COL_LATITUDE)
-    private long latitude;
+    private double latitude;
 
     @Column(name = COL_LONGITUDE)
-    private long longitude;
+    private double longitude;
 
     public long getId() {
         return id;
@@ -153,12 +153,12 @@ public class Word extends DBObject implements Parcelable{
         this.contactName = contactName;
     }
 
-    public String getContactNumber() {
-        return contactNumber;
+    public String getContactPhoneNumber() {
+        return contactPhoneNumber;
     }
 
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
+    public void setContactPhoneNumber(String contactPhoneNumber) {
+        this.contactPhoneNumber = contactPhoneNumber;
     }
 
     public String getContactEmail() {
@@ -169,19 +169,19 @@ public class Word extends DBObject implements Parcelable{
         this.contactEmail = contactEmail;
     }
 
-    public long getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(long longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public long getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(long latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
@@ -203,11 +203,11 @@ public class Word extends DBObject implements Parcelable{
         parcel.writeString(DateHelper.dateToString(deadLine));
         parcel.writeString(contactId);
         parcel.writeString(contactName);
-        parcel.writeString(contactNumber);
+        parcel.writeString(contactPhoneNumber);
         parcel.writeString(contactEmail);
         parcel.writeInt(status);
-        parcel.writeLong(latitude);
-        parcel.writeLong(longitude);
+        parcel.writeDouble(latitude);
+        parcel.writeDouble(longitude);
     }
 
     /**
@@ -224,11 +224,11 @@ public class Word extends DBObject implements Parcelable{
         this.deadLine = DateHelper.stringToDate(in.readString());
         this.contactId = in.readString();
         this.contactName = in.readString();
-        this.contactNumber = in.readString();
+        this.contactPhoneNumber = in.readString();
         this.contactEmail = in.readString();
         this.status = in.readInt();
-        this.latitude = in.readLong();
-        this.longitude = in.readLong();
+        this.latitude = in.readDouble();
+        this.longitude = in.readDouble();
     }
 
     public static final Parcelable.Creator<Word> CREATOR = new Parcelable.Creator<Word>() {
