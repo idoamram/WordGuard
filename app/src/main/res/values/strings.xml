@@ -28,7 +28,7 @@
     <!-- Strings related to Settings -->
     <string name="pref_personalization_category">Personalization</string>
     <string name="pref_general_category">General</string>
-    <string name="go_premium">Go premium</string>
+    <string name="upgrade_to_premium">Upgrade to Premium</string>
     <string name="night_mode_title">Theme</string>
     <string name="night_mode_no">Light</string>
     <string name="night_mode_yes">Dark</string>
@@ -107,13 +107,14 @@
     <string name="word_type_public">Public</string>
     <string name="word_type_private">Private</string>
     <string name="pick_from_contacts">Pick from Contacts</string>
-    <string name="contact_name">Name</string>
+    <string name="contact_name">Contact name</string>
     <string name="contact_phone_number">Phone number</string>
-    <string name="contact_email">Email</string>
+    <string name="contact_email">Email Address</string>
     <string name="more_fields">More fields</string>
     <string name="contact">Contact</string>
     <string name="save_word">SAVE</string>
-    <string name="location">Location</string>
+    <string name="add_location">Add location</string>
+    <string name="add_attachment">Add attachment</string>
     <string name="discard_dialog_message">Are you sure you want to discard changes to this word?</string>
     <string name="discard_dialog_discard">Discard</string>
     <string name="discard_dialog_keep_editing">Keep editing</string>

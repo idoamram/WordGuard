@@ -3,6 +3,7 @@ package com.io.wordguard.ui.activities;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
@@ -10,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
+import android.transition.TransitionManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +20,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.io.wordguard.Constants;
 import com.io.wordguard.R;
@@ -30,7 +33,7 @@ public class WordEditActivity extends AppCompatActivity {
     private EditText mEditTitle, mEditDescription, mEditLocation,
             mEditContactName, mEditContactNumber, mEditContactMail;
     private Spinner mEditWordTypeSpinner;
-    private TextView mEditDeadline;
+    private TextView mEditDeadline, mEditAttachment;
     private Calendar mCalendar;
     private long mDeadlineLong;
 
@@ -40,7 +43,7 @@ public class WordEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_word_edit);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Edit word");
+        toolbar.setTitle(R.string.add_word);
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null)
@@ -61,6 +64,7 @@ public class WordEditActivity extends AppCompatActivity {
         mEditContactNumber = (EditText) findViewById(R.id.word_edit_contact_number_title);
         mEditContactMail = (EditText) findViewById(R.id.word_edit_contact_email_title);
         mEditDeadline = (TextView) findViewById(R.id.word_edit_deadline);
+        mEditAttachment = (TextView) findViewById(R.id.word_edit_attachment_title);
 
         ArrayAdapter<CharSequence> wordTypeAdapter = ArrayAdapter.createFromResource(this,
                 R.array.word_types, R.layout.spinner_item);
@@ -104,6 +108,14 @@ public class WordEditActivity extends AppCompatActivity {
         return mEditTitle.length() > 0 || mEditDescription.length() > 0 || mEditLocation.length() > 0
                 || mEditContactName.length() > 0 || mEditContactNumber.length() > 0 || mEditContactMail.length() > 0
                 || mEditWordTypeSpinner.getSelectedItemPosition() != 0 || !mEditDeadline.getText().toString().isEmpty();
+    }
+
+    public void importContact(View view) {
+
+    }
+
+    public void addAttachment(View view) {
+
     }
 
     @Override

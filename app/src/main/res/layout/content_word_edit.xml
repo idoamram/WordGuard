@@ -213,7 +213,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:hint="@string/location"
+                    android:hint="@string/add_location"
                     android:textAppearance="@android:style/TextAppearance.Medium"
                     android:textColor="?android:textColorPrimary" />
 
@@ -233,6 +233,38 @@
             android:layout_height="1dp"
             android:background="@color/divider_color" />
 
+        <!--*****************Pick from contacts*****************-->
+        <LinearLayout
+            android:id="@+id/word_edit_pick_from_contacts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:minHeight="64dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    app:srcCompat="@drawable/ic_person" />
+
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="importContact"
+                    android:text="@string/pick_from_contacts"
+                    android:textColor="?colorAccent" />
+            </LinearLayout>
+        </LinearLayout>
+
         <!--*****************Contact Name*****************-->
         <RelativeLayout
             android:id="@+id/word_edit_contact_name_container"
@@ -242,14 +274,6 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin">
 
-            <ImageView
-                android:id="@+id/word_edit_contact_name_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:contentDescription="@null"
-                app:srcCompat="@drawable/ic_person" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -258,31 +282,20 @@
                 android:orientation="vertical"
                 android:paddingStart="@dimen/activity_horizontal_margin">
 
-                <EditText
-                    android:id="@+id/word_edit_contact_name_title"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="@string/contact_name"
-                    android:textAppearance="@android:style/TextAppearance.Medium"
-                    android:textColor="?android:textColorPrimary" />
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/word_edit_contact_name_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/contact_name"
+                        android:textAppearance="@android:style/TextAppearance.Medium"
+                        android:textColor="?android:textColorPrimary" />
+                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
-
-            <ImageView
-                android:id="@+id/word_edit_contact_name_import"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:background="?selectableItemBackgroundBorderless"
-                android:contentDescription="@null"
-                app:srcCompat="@drawable/ic_add_circle" />
         </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/divider_color" />
 
         <!--*****************Contact Number*****************-->
         <RelativeLayout
@@ -293,14 +306,6 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin">
 
-            <ImageView
-                android:id="@+id/word_edit_contact_number_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:contentDescription="@null"
-                app:srcCompat="@drawable/ic_dialpad" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -309,32 +314,21 @@
                 android:orientation="vertical"
                 android:paddingStart="@dimen/activity_horizontal_margin">
 
-                <EditText
-                    android:id="@+id/word_edit_contact_number_title"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="@string/contact_phone_number"
-                    android:inputType="number"
-                    android:textAppearance="@android:style/TextAppearance.Medium"
-                    android:textColor="?android:textColorPrimary" />
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/word_edit_contact_number_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/contact_phone_number"
+                        android:inputType="number"
+                        android:textAppearance="@android:style/TextAppearance.Medium"
+                        android:textColor="?android:textColorPrimary" />
+                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
-
-            <ImageView
-                android:id="@+id/word_edit_contact_number_import"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:background="?selectableItemBackgroundBorderless"
-                android:contentDescription="@null"
-                app:srcCompat="@drawable/ic_add_circle" />
         </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/divider_color" />
 
         <!--*****************Contact Email*****************-->
         <RelativeLayout
@@ -345,14 +339,6 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin">
 
-            <ImageView
-                android:id="@+id/word_edit_contact_email_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:contentDescription="@null"
-                app:srcCompat="@drawable/ic_email" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -361,26 +347,56 @@
                 android:orientation="vertical"
                 android:paddingStart="@dimen/activity_horizontal_margin">
 
-                <EditText
-                    android:id="@+id/word_edit_contact_email_title"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="@string/contact_email"
-                    android:inputType="textEmailAddress"
-                    android:textAppearance="@android:style/TextAppearance.Medium"
-                    android:textColor="?android:textColorPrimary" />
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/word_edit_contact_email_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/contact_email"
+                        android:inputType="textEmailAddress"
+                        android:textAppearance="@android:style/TextAppearance.Medium"
+                        android:textColor="?android:textColorPrimary" />
+                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_color" />
+
+        <!--*****************Attachment*****************-->
+        <RelativeLayout
+            android:id="@+id/word_edit_attachment_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:minHeight="64dp"
+            android:onClick="addAttachment"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
 
             <ImageView
-                android:id="@+id/word_edit_contact_email_import"
+                android:id="@+id/word_edit_attachment_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:background="?selectableItemBackgroundBorderless"
                 android:contentDescription="@null"
-                app:srcCompat="@drawable/ic_add_circle" />
+                app:srcCompat="@drawable/ic_attach_file" />
+
+            <TextView
+                android:id="@+id/word_edit_attachment_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/word_edit_attachment_icon"
+                android:hint="@string/add_attachment"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:textAppearance="@android:style/TextAppearance.Medium"
+                android:textColor="?android:textColorPrimary" />
         </RelativeLayout>
     </LinearLayout>
 </ScrollView>

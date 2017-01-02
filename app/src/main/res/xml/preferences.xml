@@ -2,7 +2,7 @@
     <PreferenceCategory android:title="@string/pref_general_category">
         <Preference
             android:key="premium"
-            android:title="@string/go_premium" />
+            android:title="@string/upgrade_to_premium" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_personalization_category">
         <ListPreference
