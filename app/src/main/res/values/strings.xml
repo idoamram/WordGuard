@@ -103,6 +103,7 @@
     <string name="next">Next</string>
     <string name="transition_add_word" translatable="false">add_word</string>
     <string name="word_title">Title</string>
+    <string name="word_description">Description</string>
     <string name="word_type_public">Public</string>
     <string name="word_type_private">Private</string>
     <string name="pick_from_contacts">Pick from Contacts</string>

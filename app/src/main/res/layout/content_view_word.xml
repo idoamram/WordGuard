@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.io.wordguard.ui.activities.ViewWordActivity"
+    tools:context=".ui.activities.ViewWordActivity"
     tools:showIn="@layout/activity_view_word">
 
     <TextView

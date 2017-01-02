@@ -1,159 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.activities.WordEditActivity">
 
     <LinearLayout
-        android:id="@+id/activity_word_edit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="com.io.wordguard.ui.activities.WordEditActivity">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/word_edit_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/word_title" />
+        <include layout="@layout/app_bar_layout" />
 
-        <EditText
-            android:id="@+id/word_edit_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/description" />
-
-        <TextView
-            android:id="@+id/deadline"
-            style="@style/AddWordSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginLeft="@dimen/spacing_micro"
-            android:layout_marginStart="@dimen/spacing_micro"
-            android:layout_marginTop="@dimen/padding_normal"
-            android:hint="@string/deadline"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="?android:textColorPrimary" />
-
-        <android.support.v7.widget.AppCompatSpinner
-            android:id="@+id/add_word_type_spinner"
-            style="@android:style/Widget.Holo.Light.Spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:prompt="@string/type"
-            android:spinnerMode="dropdown"
-            android:entries="@array/word_types" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:srcCompat="@drawable/ic_person_24dp"
-                android:id="@+id/imageView2" />
-
-            <LinearLayout
-                android:id="@+id/word_edit_contact_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pick_from_contacts"
-                    android:textColor="@color/colorPrimary"
-                    style="@style/Widget.AppCompat.Button.Borderless" />
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/word_edit_contact_name_inputLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:errorEnabled="true">
-
-                    <EditText
-                        android:id="@+id/word_edit_contact_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/contact_name" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/word_edit_contact_phone_number_inputLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:errorEnabled="true">
-
-                    <EditText
-                        android:id="@+id/word_edit_contact_phone_number"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/contact_phone_number"
-                        android:inputType="phone" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/word_edit_contact_email_inputLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:errorEnabled="true">
-
-                    <EditText
-                        android:id="@+id/word_edit_contact_email"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/contact_email"
-                        android:inputType="textEmailAddress" />
-
-                </android.support.design.widget.TextInputLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/word_edit_location_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:srcCompat="@drawable/ic_place_24dp" />
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/word_edit_location_inputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:errorEnabled="true">
-
-                <EditText
-                    android:id="@+id/word_edit_location"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/location"
-                    android:inputType="textPostalAddress" />
-
-            </android.support.design.widget.TextInputLayout>
-
-        </LinearLayout>
-
+        <include layout="@layout/content_word_edit" />
     </LinearLayout>
-</ScrollView>
 
+</android.support.design.widget.CoordinatorLayout>
