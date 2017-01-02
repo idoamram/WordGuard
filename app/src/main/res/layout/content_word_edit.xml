@@ -267,6 +267,16 @@
                     android:textAppearance="@android:style/TextAppearance.Medium"
                     android:textColor="?android:textColorPrimary" />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/word_edit_contact_name_import"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="?selectableItemBackgroundBorderless"
+                android:contentDescription="@null"
+                app:srcCompat="@drawable/ic_add_circle" />
         </RelativeLayout>
 
         <View
@@ -309,6 +319,16 @@
                     android:textAppearance="@android:style/TextAppearance.Medium"
                     android:textColor="?android:textColorPrimary" />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/word_edit_contact_number_import"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="?selectableItemBackgroundBorderless"
+                android:contentDescription="@null"
+                app:srcCompat="@drawable/ic_add_circle" />
         </RelativeLayout>
 
         <View
@@ -351,6 +371,16 @@
                     android:textAppearance="@android:style/TextAppearance.Medium"
                     android:textColor="?android:textColorPrimary" />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/word_edit_contact_email_import"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="?selectableItemBackgroundBorderless"
+                android:contentDescription="@null"
+                app:srcCompat="@drawable/ic_add_circle" />
         </RelativeLayout>
     </LinearLayout>
 </ScrollView>

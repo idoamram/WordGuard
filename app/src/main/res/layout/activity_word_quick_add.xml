@@ -87,6 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:onClick="moreFields"
                 android:text="@string/more_fields"
                 android:textColor="?colorAccent" />
 
@@ -96,6 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:enabled="false"
+                android:onClick="addWord"
                 android:text="@string/add"
                 android:theme="@style/AddButton" />
 

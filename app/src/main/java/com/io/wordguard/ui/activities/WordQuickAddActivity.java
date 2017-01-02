@@ -21,10 +21,12 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.io.wordguard.R;
 import com.io.wordguard.db.Word;
 import com.io.wordguard.ui.transitions.FabTransform;
 import com.io.wordguard.ui.transitions.MorphTransform;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -59,22 +61,6 @@ public class WordQuickAddActivity extends AppCompatActivity {
         mTypeSpinner.setAdapter(wordTypeAdapter);
 
         mAddBtn = (Button) findViewById(R.id.add_word_btn_add);
-        Button btnMoreFields = (Button) findViewById(R.id.add_word_btn_more_fields);
-        btnMoreFields.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Word word = new Word(WordQuickAddActivity.this);
-
-                if (TextUtils.isEmpty(mTitle.getText())) word.setTitle(mTitle.getText().toString());
-                if (mDeadlineLong > 0) word.setDeadLine(new Date(mDeadlineLong));
-                word.setType(mTypeSpinner.getSelectedItemPosition());
-
-                Intent intent = new Intent(WordQuickAddActivity.this, WordEditActivity.class);
-                intent.putExtra(WordEditActivity.EXTRA_WORD, word);
-                startActivity(intent);
-                finish();
-            }
-        });
 
         mTitle = (AutoCompleteTextView) findViewById(R.id.word_quick_add_title);
         mTitle.addTextChangedListener(new TextWatcher() {
@@ -136,6 +122,19 @@ public class WordQuickAddActivity extends AppCompatActivity {
             finish();
             overridePendingTransition(0, 0);
         }
+    }
+
+    public void moreFields(View view) {
+        Word word = new Word(WordQuickAddActivity.this);
+
+        if (TextUtils.isEmpty(mTitle.getText())) word.setTitle(mTitle.getText().toString());
+        if (mDeadlineLong > 0) word.setDeadLine(new Date(mDeadlineLong));
+        word.setType(mTypeSpinner.getSelectedItemPosition());
+
+        Intent intent = new Intent(WordQuickAddActivity.this, WordEditActivity.class);
+        intent.putExtra(WordEditActivity.EXTRA_WORD, word);
+        startActivity(intent);
+        finish();
     }
 
     public void addWord(View view) {

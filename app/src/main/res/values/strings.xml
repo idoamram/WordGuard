@@ -114,6 +114,9 @@
     <string name="contact">Contact</string>
     <string name="save_word">SAVE</string>
     <string name="location">Location</string>
+    <string name="discard_dialog_message">Are you sure you want to discard changes to this word?</string>
+    <string name="discard_dialog_discard">Discard</string>
+    <string name="discard_dialog_keep_editing">Keep editing</string>
 
     <string-array name="word_types" translatable="false">
         <item>@string/word_type_private</item>
