@@ -21,4 +21,5 @@
     <color name="ripple_color">@color/material_ripple_light</color>
     <color name="placeholder_background">#EEEEEE</color>
     <color name="scrim">#99323232</color>
+    <color name="info_headline_scrim">#40000000</color>
 </resources>
