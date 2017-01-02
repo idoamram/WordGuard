@@ -111,6 +111,7 @@
     <string name="more_fields">More fields</string>
     <string name="contact">Contact</string>
     <string name="save_word">SAVE</string>
+    <string name="location">Location</string>
 
     <string-array name="word_types" translatable="false">
         <item>@string/word_type_private</item>

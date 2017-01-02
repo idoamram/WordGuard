@@ -30,7 +30,6 @@ public class Word extends DBObject implements Parcelable{
     private static final String COL_TYPE = "type";
     private static final String COL_CREATION_TIME = "creation_time";
     private static final String COL_DEAD_LINE = "dead_line";
-    private static final String COL_ATTACHMENT = "attachment";
     private static final String COL_CONTACT_ID = "contact_id";
     private static final String COL_CONTACT_NAME = "contact_name";
     private static final String COL_CONTACT_NUMBER = "contact_number";
@@ -63,9 +62,6 @@ public class Word extends DBObject implements Parcelable{
 
     @Column(name = COL_DEAD_LINE)
     private Date deadLine;
-
-    @Column(name = COL_ATTACHMENT)
-    private String attachment;
 
     @Column(name = COL_CONTACT_ID)
     private String contactId;
@@ -141,14 +137,6 @@ public class Word extends DBObject implements Parcelable{
         this.deadLine = deadLine;
     }
 
-    public String getAttachment() {
-        return attachment;
-    }
-
-    public void setAttachment(String attachment) {
-        this.attachment = attachment;
-    }
-
     public String getContactId() {
         return contactId;
     }
@@ -213,7 +201,6 @@ public class Word extends DBObject implements Parcelable{
         parcel.writeInt(type);
         parcel.writeString(DateHelper.dateToString(creationTime));
         parcel.writeString(DateHelper.dateToString(deadLine));
-        parcel.writeString(attachment);
         parcel.writeString(contactId);
         parcel.writeString(contactName);
         parcel.writeString(contactNumber);
@@ -235,7 +222,6 @@ public class Word extends DBObject implements Parcelable{
         this.type = in.readInt();
         this.creationTime = DateHelper.stringToDate(in.readString());
         this.deadLine = DateHelper.stringToDate(in.readString());
-        this.attachment = in.readString();
         this.contactId = in.readString();
         this.contactName = in.readString();
         this.contactNumber = in.readString();
