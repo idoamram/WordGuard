@@ -14,8 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.io.wordguard.R;
-import com.io.wordguard.ui.activities.AddWordActivity;
-import com.io.wordguard.ui.activities.MainActivity;
+import com.io.wordguard.ui.activities.WordQuickAddActivity;
 import com.io.wordguard.ui.adapters.TabPagerAdapter;
 import com.io.wordguard.ui.transitions.FabTransform;
 import com.io.wordguard.ui.util.ThemeUtils;
@@ -73,14 +72,14 @@ public class ActiveFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    Intent intent = new Intent(getActivity(), AddWordActivity.class);
+                    Intent intent = new Intent(getActivity(), WordQuickAddActivity.class);
                     FabTransform.addExtras(intent, ThemeUtils.getThemeColor(
                             getActivity(), R.color.colorAccent), R.drawable.ic_add);
                     ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation
                             (getActivity(), mFab, getString(R.string.transition_add_word));
                     startActivityForResult(intent, RC_ADD_WORD, options.toBundle());
                 } else {
-                    startActivity(new Intent(getActivity(), AddWordActivity.class));
+                    startActivity(new Intent(getActivity(), WordQuickAddActivity.class));
                 }
             }
         });

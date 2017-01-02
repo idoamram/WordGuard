@@ -2,11 +2,14 @@ package com.io.wordguard.ui.activities;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.AppCompatSpinner;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.transition.TransitionManager;
@@ -15,30 +18,29 @@ import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.io.wordguard.R;
+import com.io.wordguard.db.Word;
 import com.io.wordguard.ui.transitions.FabTransform;
 import com.io.wordguard.ui.transitions.MorphTransform;
-
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
+import java.util.Date;
 
-public class AddWordActivity extends AppCompatActivity {
+public class WordQuickAddActivity extends AppCompatActivity {
     private ViewGroup mContainer;
-    private AutoCompleteTextView mDescription;
+    private AutoCompleteTextView mTitle;
     private Button mAdd;
     private Calendar mCalendar;
     private TextView mDeadline;
+    private AppCompatSpinner mTypeSpinner;
     private long mDeadlineLong;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_word);
+        setContentView(R.layout.activity_word_quick_add);
 
         mContainer = (ViewGroup) findViewById(R.id.container);
 
@@ -50,10 +52,28 @@ public class AddWordActivity extends AppCompatActivity {
             }
         }
 
-        mAdd = (Button) findViewById(R.id.add);
+        mTypeSpinner = (AppCompatSpinner) findViewById(R.id.add_word_type_spinner);
 
-        mDescription = (AutoCompleteTextView) findViewById(R.id.description);
-        mDescription.addTextChangedListener(new TextWatcher() {
+        mAdd = (Button) findViewById(R.id.add);
+        Button btnMoreFields = (Button) findViewById(R.id.add_word_btn_more_fields);
+        btnMoreFields.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Word word = new Word(WordQuickAddActivity.this);
+
+                if (TextUtils.isEmpty(mTitle.getText())) word.setTitle(mTitle.getText().toString());
+                if (mDeadlineLong > 0) word.setDeadLine(new Date(mDeadlineLong));
+                word.setType(mTypeSpinner.getSelectedItem().equals("Private") ? Word.TYPE_PRIVATE : Word.TYPE_PUBLIC);
+
+                Intent intent = new Intent(WordQuickAddActivity.this, WordEditActivity.class);
+                intent.putExtra(WordEditActivity.EXTRA_WORD, word);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        mTitle = (AutoCompleteTextView) findViewById(R.id.word_quick_add_title);
+        mTitle.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -77,7 +97,7 @@ public class AddWordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Open dialog picker with today's date
-                DatePickerDialog datePickerDialog = new DatePickerDialog(AddWordActivity.this,
+                DatePickerDialog datePickerDialog = new DatePickerDialog(WordQuickAddActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
@@ -118,13 +138,13 @@ public class AddWordActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             TransitionManager.beginDelayedTransition(mContainer);
         }
-        Toast.makeText(this, mDescription.getText().toString()
+        Toast.makeText(this, mTitle.getText().toString()
                 + "\n" + mDeadlineLong, Toast.LENGTH_LONG).show();
         dismiss(null);
     }
 
     private boolean isDescriptionValid() {
-        return mDescription.length() > 0;
+        return mTitle.length() > 0;
     }
 
     @Override

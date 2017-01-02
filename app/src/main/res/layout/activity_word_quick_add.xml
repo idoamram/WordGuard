@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:onClick="dismiss"
-    tools:context=".ui.activities.AddWordActivity">
+    tools:context=".ui.activities.WordQuickAddActivity">
 
     <LinearLayout
         android:id="@+id/container"
@@ -42,7 +43,7 @@
             android:layout_marginStart="@dimen/spacing_micro">
 
             <AutoCompleteTextView
-                android:id="@+id/description"
+                android:id="@+id/word_quick_add_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/word_title"
@@ -65,27 +66,41 @@
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/add_word_type_spinner"
+            style="@android:style/Widget.Holo.Light.Spinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:prompt="@string/type"
+            android:spinnerMode="dropdown"
+            android:entries="@array/word_types"/>
 
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/actions_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding_normal">
+            android:layout_marginTop="@dimen/padding_normal"
+            android:orientation="horizontal"
+            style="?android:attr/buttonBarStyle">
 
             <Button
-                android:id="@+id/add"
-                android:layout_width="wrap_content"
+                android:id="@+id/add_word_btn_more_fields"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
+                android:layout_weight="1"
+                android:enabled="true"
+                android:text="@string/more_fields"
+                style="?android:attr/buttonBarButtonStyle" />
+
+            <Button
+                android:id="@+id/add_word_btn_add"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:enabled="false"
                 android:onClick="addWord"
                 android:text="@string/add"
                 android:theme="@style/AddButton" />
 
-        </FrameLayout>
-
+        </LinearLayout>
     </LinearLayout>
 
 </FrameLayout>

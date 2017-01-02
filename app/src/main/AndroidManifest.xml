@@ -50,7 +50,7 @@
                 android:value=".ui.activities.MainActivity" />
         </activity>
         <activity
-            android:name=".ui.activities.AddWordActivity"
+            android:name=".ui.activities.WordQuickAddActivity"
             android:exported="false"
             android:launchMode="singleTop"
             android:parentActivityName=".ui.activities.MainActivity"
@@ -61,10 +61,20 @@
                 android:value=".ui.activities.MainActivity" />
         </activity>
 
-        <meta-data android:name="DATABASE_NAME" android:value="word_guard_db" />
-        <meta-data android:name="DATABASE_VERSION" android:value="1" />
-        <meta-data android:name="CONFIG_CLASS" android:value="com.io.wordguard.db.Configs" />
-        <meta-data android:name="ENTITIES_CLASSES_NAME" android:value="com.io.wordguard.db.entities.Word" />
+        <meta-data
+            android:name="DATABASE_NAME"
+            android:value="word_guard_db" />
+        <meta-data
+            android:name="DATABASE_VERSION"
+            android:value="1" />
+        <meta-data
+            android:name="CONFIG_CLASS"
+            android:value="com.io.wordguard.db.Configs" />
+        <meta-data
+            android:name="ENTITIES_CLASSES_NAME"
+            android:value="com.io.wordguard.db.entities.Word" />
 
+        <activity android:name=".ui.activities.WordEditActivity"></activity>
     </application>
+
 </manifest>

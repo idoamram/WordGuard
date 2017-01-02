@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#4CAF50</color>
+    <color name="colorPrimaryDark">#388E3C</color>
+    <color name="colorAccent">#009688</color>
     <!--Material Design Color Parameters-->
     <color name="primary_text_color">@color/material_light_primary_text</color>
     <color name="primary_text_color_inverse">@color/material_dark_primary_text</color>

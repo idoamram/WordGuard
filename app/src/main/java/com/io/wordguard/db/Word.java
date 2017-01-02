@@ -1,5 +1,10 @@
 package com.io.wordguard.db;
 
+import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.io.wordguard.ui.util.DateHelper;
 import com.simplite.orm.DBObject;
 import com.simplite.orm.annotations.Column;
 import com.simplite.orm.annotations.Entity;
@@ -8,7 +13,7 @@ import java.util.Date;
 import static com.io.wordguard.db.Word.TABLE_NAME;
 
 @Entity(tableName = TABLE_NAME)
-class Word extends DBObject {
+public class Word extends DBObject implements Parcelable{
 
     public static final int TYPE_PRIVATE = 0;
     public static final int TYPE_PUBLIC = 1;
@@ -31,6 +36,10 @@ class Word extends DBObject {
     private static final String COL_CONTACT_NUMBER = "contact_number";
     private static final String COL_CONTACT_EMAIL = "contact_email";
     private static final String COL_STATUS = "status";
+
+    public Word(Context context) {
+        super(context);
+    }
 
     @PrimaryKey(columnName = COL_ID, options = {OPTION_AUTOINCREAMENT})
     private long id;
@@ -67,4 +76,158 @@ class Word extends DBObject {
 
     @Column(name = COL_CONTACT_EMAIL)
     private String contactEmail;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Date getDeadLine() {
+        return deadLine;
+    }
+
+    public void setDeadLine(Date deadLine) {
+        this.deadLine = deadLine;
+    }
+
+    public String getAttachment() {
+        return attachment;
+    }
+
+    public void setAttachment(String attachment) {
+        this.attachment = attachment;
+    }
+
+    public String getContactId() {
+        return contactId;
+    }
+
+    public void setContactId(String contactId) {
+        this.contactId = contactId;
+    }
+
+    public String getContactName() {
+        return contactName;
+    }
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public String getContactEmail() {
+        return contactEmail;
+    }
+
+    public void setContactEmail(String contactEmail) {
+        this.contactEmail = contactEmail;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    /**
+     * Storing the Word data to Parcel object
+     **/
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeLong(id);
+        parcel.writeString(title);
+        parcel.writeString(description);
+        parcel.writeInt(type);
+        if (creationTime == null)
+        parcel.writeString(DateHelper.dateToString(creationTime));
+        parcel.writeString(DateHelper.dateToString(deadLine));
+        parcel.writeString(attachment);
+        parcel.writeString(contactId);
+        parcel.writeString(contactName);
+        parcel.writeString(contactNumber);
+        parcel.writeString(contactEmail);
+        parcel.writeInt(status);
+    }
+
+    /**
+     * Retrieving Word data from Parcel object
+     * This constructor is invoked by the method createFromParcel(Parcel source) of
+     * the object CREATOR
+     **/
+    private Word(Parcel in) {
+        this.id = in.readLong();
+        this.title = in.readString();
+        this.description = in.readString();
+        this.type = in.readInt();
+        this.creationTime = DateHelper.stringToDate(in.readString());
+        this.deadLine = DateHelper.stringToDate(in.readString());
+        this.attachment = in.readString();
+        this.contactId = in.readString();
+        this.contactName = in.readString();
+        this.contactNumber = in.readString();
+        this.contactEmail = in.readString();
+        this.status = in.readInt();
+    }
+
+    public static final Parcelable.Creator<Word> CREATOR = new Parcelable.Creator<Word>() {
+
+        @Override
+        public Word createFromParcel(Parcel source) {
+            return new Word(source);
+        }
+
+        @Override
+        public Word[] newArray(int size) {
+            return new Word[size];
+        }
+    };
 }
