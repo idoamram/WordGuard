@@ -58,7 +58,8 @@ public class SwipeHelperCallback extends ItemTouchHelper.SimpleCallback {
                         (float) itemView.getLeft() + dp2px(24),
                         (float) itemView.getTop() + ((float) itemView.getBottom() -
                                 (float) itemView.getTop() - icon.getHeight()) / 2, paint);
-            } else {
+                // icon offset 110
+            } else if (dX < 0){
                 icon = BitmapHelper.getBitmapFromVectorDrawable(mContext, R.drawable.ic_delete_white);
                 paint.setColor(ContextCompat.getColor(mContext, R.color.swipe_delete_red));
                 // Draw Rect with varying left side, equal to the item's right side
@@ -70,6 +71,7 @@ public class SwipeHelperCallback extends ItemTouchHelper.SimpleCallback {
                         (float) itemView.getRight() - dp2px(24) - icon.getWidth(),
                         (float) itemView.getTop() + ((float) itemView.getBottom() -
                                 (float) itemView.getTop() - icon.getHeight()) / 2, paint);
+                // icon offset -110
             }
             // Fade out the view as it is swiped out of the parent's bounds
 //            final float alpha = 1.0f - Math.abs(dX) / (float) viewHolder.itemView.getWidth();
