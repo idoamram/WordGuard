@@ -74,7 +74,7 @@ public class SwipeHelperCallback extends ItemTouchHelper.SimpleCallback {
             // Fade out the view as it is swiped out of the parent's bounds
 //            final float alpha = 1.0f - Math.abs(dX) / (float) viewHolder.itemView.getWidth();
 //            viewHolder.itemView.setAlpha(alpha);
-//            viewHolder.itemView.setTranslationX(dX);
+            viewHolder.itemView.setTranslationX(dX);
         } else {
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
         }
