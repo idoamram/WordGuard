@@ -22,4 +22,6 @@
     <color name="placeholder_background">#EEEEEE</color>
     <color name="scrim">#99323232</color>
     <color name="info_headline_scrim">#40000000</color>
+    <color name="swipe_done_green">#0F9D58</color>
+    <color name="swipe_delete_red">#D23F31</color>
 </resources>
