@@ -63,7 +63,7 @@ public class WordQuickAddActivity extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(mTitle.getText())) word.setTitle(mTitle.getText().toString());
                 if (mDeadlineLong > 0) word.setDeadLine(new Date(mDeadlineLong));
-                word.setType(mTypeSpinner.getSelectedItem().equals("Private") ? Word.TYPE_PRIVATE : Word.TYPE_PUBLIC);
+                word.setType(mTypeSpinner.getSelectedItemPosition());
 
                 Intent intent = new Intent(WordQuickAddActivity.this, WordEditActivity.class);
                 intent.putExtra(WordEditActivity.EXTRA_WORD, word);

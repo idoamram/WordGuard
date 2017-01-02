@@ -36,6 +36,8 @@ public class Word extends DBObject implements Parcelable{
     private static final String COL_CONTACT_NUMBER = "contact_number";
     private static final String COL_CONTACT_EMAIL = "contact_email";
     private static final String COL_STATUS = "status";
+    private static final String COL_LONGITUDE = "longitude";
+    private static final String COL_LATITUDE = "latitude";
 
     public Word(Context context) {
         super(context);
@@ -76,6 +78,12 @@ public class Word extends DBObject implements Parcelable{
 
     @Column(name = COL_CONTACT_EMAIL)
     private String contactEmail;
+
+    @Column(name = COL_LATITUDE)
+    private long latitude;
+
+    @Column(name = COL_LONGITUDE)
+    private long longitude;
 
     public long getId() {
         return id;
@@ -173,6 +181,22 @@ public class Word extends DBObject implements Parcelable{
         this.contactEmail = contactEmail;
     }
 
+    public long getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(long longitude) {
+        this.longitude = longitude;
+    }
+
+    public long getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(long latitude) {
+        this.latitude = latitude;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -187,7 +211,6 @@ public class Word extends DBObject implements Parcelable{
         parcel.writeString(title);
         parcel.writeString(description);
         parcel.writeInt(type);
-        if (creationTime == null)
         parcel.writeString(DateHelper.dateToString(creationTime));
         parcel.writeString(DateHelper.dateToString(deadLine));
         parcel.writeString(attachment);
@@ -196,6 +219,8 @@ public class Word extends DBObject implements Parcelable{
         parcel.writeString(contactNumber);
         parcel.writeString(contactEmail);
         parcel.writeInt(status);
+        parcel.writeLong(latitude);
+        parcel.writeLong(longitude);
     }
 
     /**
@@ -216,6 +241,8 @@ public class Word extends DBObject implements Parcelable{
         this.contactNumber = in.readString();
         this.contactEmail = in.readString();
         this.status = in.readInt();
+        this.latitude = in.readLong();
+        this.longitude = in.readLong();
     }
 
     public static final Parcelable.Creator<Word> CREATOR = new Parcelable.Creator<Word>() {
