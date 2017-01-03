@@ -13,10 +13,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.io.wordguard.R;
+import com.io.wordguard.db.ContentProvider;
+import com.io.wordguard.db.ContentProviderCallBack;
 import com.io.wordguard.db.Word;
 import com.io.wordguard.ui.adapters.WordRecyclerAdapter;
 import com.io.wordguard.ui.util.SwipeCallback;
 import com.io.wordguard.ui.util.SwipeHelperCallback;
+import com.simplite.orm.DBObject;
 import com.simplite.orm.interfaces.BackgroundTaskCallBack;
 
 import java.util.ArrayList;
@@ -35,38 +38,9 @@ public class AllWordsFragment extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.all_words_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        Word word1 = new Word(getContext());
-        word1.setTitle("Call to Mama");
-        word1.setContactPhoneNumber("0545290025");
-        word1.setDeadLine(new Date(new Date().getTime() + 824000000));
-
-        Word word2 = new Word(getContext());
-        word2.setTitle("Make papa a cup of tea");
-        word2.setContactEmail("ido.movieditor@gmail.com");
-        word2.setDeadLine(new Date(new Date().getTime() + 734000000));
-
-        Word word3 = new Word(getContext());
-        word3.setTitle("Buy a MacBook Pro 15inch with TouchBar");
-        word3.setContactName("iDigital");
-        word3.setLatitude(29.557669);
-        word3.setLongitude(34.951925);
-        word3.setDeadLine(new Date(new Date().getTime() + 974000000));
-
-        Word word4 = new Word(getContext());
-        word4.setTitle("Surf in the weekend!!");
-        word4.setDeadLine(new Date(new Date().getTime() + 1004000000));
-
-        ArrayList<Word> words = new ArrayList<>();
-        words.add(word1);
-        words.add(word2);
-        words.add(word3);
-        words.add(word4);
-
-        adapter = new WordRecyclerAdapter(words);
+        adapter = new WordRecyclerAdapter(new ArrayList<Word>());
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
-
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeHelperCallback(getContext(), 0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, new SwipeCallback() {
             @Override
@@ -74,8 +48,44 @@ public class AllWordsFragment extends Fragment {
                 adapter.removeItem(itemPosition);
             }
         }));
-
         itemTouchHelper.attachToRecyclerView(recyclerView);
+
+//        Word word1 = new Word(getContext());
+//        word1.setTitle("Call to Mama");
+//        word1.setContactPhoneNumber("0545290025");
+//        word1.setDeadLine(new Date(new Date().getTime() + 824000000));
+//
+//        Word word2 = new Word(getContext());
+//        word2.setTitle("Make papa a cup of tea");
+//        word2.setContactEmail("ido.movieditor@gmail.com");
+//        word2.setDeadLine(new Date(new Date().getTime() + 734000000));
+//
+//        Word word3 = new Word(getContext());
+//        word3.setTitle("Buy a MacBook Pro 15inch with TouchBar");
+//        word3.setContactName("iDigital");
+//        word3.setLatitude(29.557669);
+//        word3.setLongitude(34.951925);
+//        word3.setDeadLine(new Date(new Date().getTime() + 974000000));
+//
+//        Word word4 = new Word(getContext());
+//        word4.setTitle("Surf in the weekend!!");
+//        word4.setDeadLine(new Date(new Date().getTime() + 1004000000));
+//
+//        ArrayList<Word> words = new ArrayList<>();
+//        words.add(word1);
+//        words.add(word2);
+//        words.add(word3);
+//        words.add(word4);
+
+        ContentProvider.getInstance().getAllWords(getActivity(), new ContentProviderCallBack() {
+            @Override
+            public void onFinish(ArrayList<? extends DBObject> data, Object extra, Exception e) {
+                if (e == null) {
+                    adapter.setData((ArrayList<Word>) data);
+                } else e.printStackTrace();
+            }
+        });
+
         return rootView;
     }
 }

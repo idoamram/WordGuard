@@ -27,14 +27,14 @@ public class Word extends DBObject implements Parcelable{
     private static final String COL_ID = "id";
     private static final String COL_TITLE = "title";
     private static final String COL_DESCRIPTION = "description";
-    private static final String COL_TYPE = "type";
+    public static final String COL_TYPE = "type";
     private static final String COL_CREATION_TIME = "creation_time";
     public static final String COL_DEAD_LINE = "dead_line";
     private static final String COL_CONTACT_ID = "contact_id";
     private static final String COL_CONTACT_NAME = "contact_name";
     private static final String COL_CONTACT_PHONE_NUMBER = "contact_phone_number";
     private static final String COL_CONTACT_EMAIL = "contact_email";
-    private static final String COL_STATUS = "status";
+    public static final String COL_STATUS = "status";
     private static final String COL_LONGITUDE = "longitude";
     private static final String COL_LATITUDE = "latitude";
 

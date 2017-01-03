@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -32,7 +33,7 @@ import java.util.Date;
 
 public class WordQuickAddActivity extends AppCompatActivity {
     private ViewGroup mContainer;
-    private AutoCompleteTextView mTitle;
+    private TextInputEditText mTitle;
     private Button mAddBtn;
     private Calendar mCalendar;
     private TextView mDeadline;
@@ -62,7 +63,7 @@ public class WordQuickAddActivity extends AppCompatActivity {
 
         mAddBtn = (Button) findViewById(R.id.add_word_btn_add);
 
-        mTitle = (AutoCompleteTextView) findViewById(R.id.word_quick_add_title);
+        mTitle = (TextInputEditText) findViewById(R.id.word_quick_add_title);
         mTitle.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -133,6 +134,7 @@ public class WordQuickAddActivity extends AppCompatActivity {
 
         Intent intent = new Intent(WordQuickAddActivity.this, WordEditActivity.class);
         intent.putExtra(WordEditActivity.EXTRA_WORD, word);
+        intent.putExtra(WordEditActivity.EXTRA_EDIT_MODE, WordEditActivity.EDIT_MODE_CREATE);
         startActivity(intent);
         finish();
     }

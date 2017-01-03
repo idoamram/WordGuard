@@ -106,7 +106,7 @@
             android:value="com.io.wordguard.db.Configs" />
         <meta-data
             android:name="ENTITIES_CLASSES_NAME"
-            android:value="com.io.wordguard.db.entities.Word" />
+            android:value="com.io.wordguard.db.Word" />
     </application>
 
 </manifest>

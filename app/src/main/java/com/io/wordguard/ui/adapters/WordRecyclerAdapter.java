@@ -78,6 +78,11 @@ public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapte
         notifyItemRangeChanged(position, mWords.size());
     }
 
+    public void setData(ArrayList<Word> data) {
+        mWords = data;
+        notifyDataSetChanged();
+    }
+
     class WordHolder extends RecyclerView.ViewHolder{
 
         TextView title;
