@@ -43,7 +43,7 @@ public class WordEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_word_edit);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.add_word);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null)
@@ -73,7 +73,7 @@ public class WordEditActivity extends AppCompatActivity {
 
         mCalendar = Calendar.getInstance();
 
-        mEditDeadline.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.word_edit_deadline_container).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Open dialog picker with today's date

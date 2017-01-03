@@ -103,6 +103,7 @@
     <string name="next">Next</string>
     <string name="transition_add_word" translatable="false">add_word</string>
     <string name="word_title">Title</string>
+    <string name="word_title_hint">Enter title</string>
     <string name="word_description">Description</string>
     <string name="word_type_public">Public</string>
     <string name="word_type_private">Private</string>
@@ -112,7 +113,8 @@
     <string name="contact_email">Email Address</string>
     <string name="more_fields">More fields</string>
     <string name="contact">Contact</string>
-    <string name="save_word">SAVE</string>
+    <string name="save_word">Save</string>
+    <string name="delete_word">Delete</string>
     <string name="add_location">Add location</string>
     <string name="add_attachment">Add attachment</string>
     <string name="discard_dialog_message">Are you sure you want to discard changes to this word?</string>

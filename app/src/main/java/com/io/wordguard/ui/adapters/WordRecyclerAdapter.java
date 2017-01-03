@@ -58,7 +58,7 @@ public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapte
 
         if (word.getLongitude() != 0 && word.getLatitude() != 0) {
             holder.locationContainer.setVisibility(View.VISIBLE);
-            holder.location.setText(R.string.location);
+            holder.location.setText(R.string.add_location);
         } else holder.locationContainer.setVisibility(View.GONE);
     }
 
