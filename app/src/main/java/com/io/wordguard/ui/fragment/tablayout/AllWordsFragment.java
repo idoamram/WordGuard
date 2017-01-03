@@ -50,33 +50,6 @@ public class AllWordsFragment extends Fragment {
         }));
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
-//        Word word1 = new Word(getContext());
-//        word1.setTitle("Call to Mama");
-//        word1.setContactPhoneNumber("0545290025");
-//        word1.setDeadLine(new Date(new Date().getTime() + 824000000));
-//
-//        Word word2 = new Word(getContext());
-//        word2.setTitle("Make papa a cup of tea");
-//        word2.setContactEmail("ido.movieditor@gmail.com");
-//        word2.setDeadLine(new Date(new Date().getTime() + 734000000));
-//
-//        Word word3 = new Word(getContext());
-//        word3.setTitle("Buy a MacBook Pro 15inch with TouchBar");
-//        word3.setContactName("iDigital");
-//        word3.setLatitude(29.557669);
-//        word3.setLongitude(34.951925);
-//        word3.setDeadLine(new Date(new Date().getTime() + 974000000));
-//
-//        Word word4 = new Word(getContext());
-//        word4.setTitle("Surf in the weekend!!");
-//        word4.setDeadLine(new Date(new Date().getTime() + 1004000000));
-//
-//        ArrayList<Word> words = new ArrayList<>();
-//        words.add(word1);
-//        words.add(word2);
-//        words.add(word3);
-//        words.add(word4);
-
         ContentProvider.getInstance().getAllWords(getActivity(), new ContentProviderCallBack() {
             @Override
             public void onFinish(ArrayList<? extends DBObject> data, Object extra, Exception e) {
