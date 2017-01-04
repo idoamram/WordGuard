@@ -1,23 +1,30 @@
 package com.io.wordguard.ui.activities;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,8 +47,11 @@ public class WordEditActivity extends AppCompatActivity {
     public static final int EDIT_MODE_CREATE = 1;
     public static final int EDIT_MODE_SAVE = 2;
 
+    private static final int REQUEST_PICK_CONTACT = 123;
+    private static final int REQUEST_READ_CONTACTS_PERMISSION = 111;
+
     private TextInputEditText mEditTitle, mEditDescription, mEditLocation,
-            mEditContactName, mEditContactNumber, mEditContactMail;
+            mEditContactName, mEditContactPhoneNumber, mEditContactMail;
     private Spinner mEditWordTypeSpinner;
     private TextView mEditDeadline;
     private Calendar mCalendar;
@@ -74,7 +84,7 @@ public class WordEditActivity extends AppCompatActivity {
         mEditDescription = (TextInputEditText) findViewById(R.id.word_edit_description_title);
         mEditLocation = (TextInputEditText) findViewById(R.id.word_edit_location_title);
         mEditContactName = (TextInputEditText) findViewById(R.id.word_edit_contact_name_title);
-        mEditContactNumber = (TextInputEditText) findViewById(R.id.word_edit_contact_number_title);
+        mEditContactPhoneNumber = (TextInputEditText) findViewById(R.id.word_edit_contact_number_title);
         mEditContactMail = (TextInputEditText) findViewById(R.id.word_edit_contact_email_title);
         mEditDeadline = (TextView) findViewById(R.id.word_edit_deadline);
 
@@ -126,12 +136,137 @@ public class WordEditActivity extends AppCompatActivity {
 
     private boolean isFieldsFull() {
         return mEditTitle.length() > 0 || mEditDescription.length() > 0 || mEditLocation.length() > 0
-                || mEditContactName.length() > 0 || mEditContactNumber.length() > 0 || mEditContactMail.length() > 0
+                || mEditContactName.length() > 0 || mEditContactPhoneNumber.length() > 0 || mEditContactMail.length() > 0
                 || mEditWordTypeSpinner.getSelectedItemPosition() != 0 || !mEditDeadline.getText().toString().isEmpty();
     }
 
     public void importContact(View view) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            int permissionCheck;
+            permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS);
+            if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+                // User may have declined earlier, ask Android if we should show him a reason
+                if (shouldShowRequestPermissionRationale(Manifest.permission.READ_CONTACTS)) {
+                    // show an explanation to the user
+                    // Good practise: don't block thread after the user sees the explanation, try again to request the permission.
+                    requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, REQUEST_READ_CONTACTS_PERMISSION);
+                } else {
+                    // request the permission
+                    requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, REQUEST_READ_CONTACTS_PERMISSION);
+                }
+            } else {
+                // got permission use it
+                startPickFromContacts();
+            }
+        } else {
+            startPickFromContacts();
+        }
+    }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_READ_CONTACTS_PERMISSION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, do your work....
+                    startPickFromContacts();
+                } else {
+                    // permission denied
+                    // Disable the functionality that depends on this permission.
+                }
+            }
+        }
+    }
+
+    private void startPickFromContacts() {
+        startActivityForResult(new Intent(Intent.ACTION_PICK,
+                ContactsContract.Contacts.CONTENT_URI), REQUEST_PICK_CONTACT);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // check whether the result is ok
+        if (resultCode == RESULT_OK) {
+            // Check for the request code, we might be usign multiple startActivityForReslut
+            switch (requestCode) {
+                case REQUEST_PICK_CONTACT:
+                    getDataFromPickedContact(data);
+                    break;
+            }
+        } else {
+            Log.e(Constants.LOG_TAG, "Failed to pick contact");
+        }
+    }
+
+    private void getDataFromPickedContact(Intent data) {
+        // *** Get contact name ***
+        String contactID = null;
+        String contactName;
+        String contactPhoneNumber;
+        String contactEmail;
+
+        // querying contact data store
+        Cursor cursor = getContentResolver().query(data.getData(), null, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            // DISPLAY_NAME = The display name for the contact.
+            contactName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+            cursor.close();
+            if (!TextUtils.isEmpty(contactName)) {
+                mEditContactName.setText(contactName);
+            }
+        }
+
+        // Getting contacts ID
+        Cursor cursorID = getContentResolver().query(data.getData(),
+                new String[]{ContactsContract.Contacts._ID},
+                null, null, null);
+
+        if (cursorID != null && cursorID.moveToFirst()) {
+            contactID = cursorID.getString(cursorID.getColumnIndex(ContactsContract.Contacts._ID));
+            cursorID.close();
+        }
+
+        // *** Get contact Phone number ***
+        // Get contact phone number using the contact ID
+        if (!TextUtils.isEmpty(contactID)) {
+            Cursor cursorPhone = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                    new String[]{ContactsContract.CommonDataKinds.Phone.NUMBER},
+                    ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ? AND " +
+                            ContactsContract.CommonDataKinds.Phone.TYPE + " = " +
+                            ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE,
+                    new String[]{contactID},
+                    null);
+
+            if (cursorPhone != null && cursorPhone.moveToFirst()) {
+                contactPhoneNumber = cursorPhone.getString(cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                cursorPhone.close();
+                if (!TextUtils.isEmpty(contactPhoneNumber)) {
+                    mEditContactPhoneNumber.setText(contactPhoneNumber);
+                }
+            }
+        }
+
+        // *** Get contact Email***
+        // Get contact email using the contact ID
+        if (!TextUtils.isEmpty(contactID)) {
+            Cursor cursorEmail = getContentResolver().query(ContactsContract.CommonDataKinds.Email.CONTENT_URI,
+                    new String[]{ContactsContract.CommonDataKinds.Email.ADDRESS},
+                    ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
+                    new String[]{contactID},
+                    null);
+
+            if (cursorEmail != null && cursorEmail.moveToFirst()) {
+                contactEmail = cursorEmail.getString(cursorEmail.getColumnIndex(ContactsContract.CommonDataKinds.Email.ADDRESS));
+                cursorEmail.close();
+                if (!TextUtils.isEmpty(contactEmail)) {
+                    mEditContactMail.setText(contactEmail);
+                }
+            }
+        }
     }
 
     public void addAttachment(View view) {
@@ -184,8 +319,8 @@ public class WordEditActivity extends AppCompatActivity {
             mWord.setDeadLine(new Date(mDeadlineLong));
         if (!TextUtils.isEmpty(mEditContactName.getText()))
             mWord.setContactName(mEditContactName.getText().toString());
-        if (!TextUtils.isEmpty(mEditContactNumber.getText()))
-            mWord.setContactPhoneNumber(mEditContactNumber.getText().toString());
+        if (!TextUtils.isEmpty(mEditContactPhoneNumber.getText()))
+            mWord.setContactPhoneNumber(mEditContactPhoneNumber.getText().toString());
         if (!TextUtils.isEmpty(mEditContactMail.getText()))
             mWord.setContactEmail(mEditContactMail.getText().toString());
     }
