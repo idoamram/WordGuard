@@ -35,8 +35,9 @@ public class Word extends DBObject implements Parcelable{
     private static final String COL_CONTACT_PHONE_NUMBER = "contact_phone_number";
     private static final String COL_CONTACT_EMAIL = "contact_email";
     public static final String COL_STATUS = "status";
-    private static final String COL_LONGITUDE = "longitude";
-    private static final String COL_LATITUDE = "latitude";
+    private static final String COL_LOCATION_LONGITUDE = "location_longitude";
+    private static final String COL_LOCATION_LATITUDE = "location_latitude";
+    private static final String COL_LOCATION_ADDRESS = "location_address";
 
     public Word(Context context) {
         super(context);
@@ -75,11 +76,14 @@ public class Word extends DBObject implements Parcelable{
     @Column(name = COL_CONTACT_EMAIL)
     private String contactEmail;
 
-    @Column(name = COL_LATITUDE)
-    private double latitude;
+    @Column(name = COL_LOCATION_LATITUDE)
+    private double locationLatitude;
 
-    @Column(name = COL_LONGITUDE)
-    private double longitude;
+    @Column(name = COL_LOCATION_LONGITUDE)
+    private double locationLongitude;
+
+    @Column(name = COL_LOCATION_ADDRESS)
+    private String locationAddress;
 
     public long getId() {
         return id;
@@ -169,20 +173,28 @@ public class Word extends DBObject implements Parcelable{
         this.contactEmail = contactEmail;
     }
 
-    public double getLongitude() {
-        return longitude;
+    public double getLocationLongitude() {
+        return locationLongitude;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public void setLocationLongitude(double locationLongitude) {
+        this.locationLongitude = locationLongitude;
     }
 
-    public double getLatitude() {
-        return latitude;
+    public double getLocationLatitude() {
+        return locationLatitude;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public void setLocationLatitude(double locationLatitude) {
+        this.locationLatitude = locationLatitude;
+    }
+
+    public String getLocationAddress() {
+        return locationAddress;
+    }
+
+    public void setLocationAddress(String locationAddress) {
+        this.locationAddress = locationAddress;
     }
 
     @Override
@@ -206,8 +218,9 @@ public class Word extends DBObject implements Parcelable{
         parcel.writeString(contactPhoneNumber);
         parcel.writeString(contactEmail);
         parcel.writeInt(status);
-        parcel.writeDouble(latitude);
-        parcel.writeDouble(longitude);
+        parcel.writeDouble(locationLatitude);
+        parcel.writeDouble(locationLongitude);
+        parcel.writeString(locationAddress);
     }
 
     /**
@@ -227,8 +240,9 @@ public class Word extends DBObject implements Parcelable{
         this.contactPhoneNumber = in.readString();
         this.contactEmail = in.readString();
         this.status = in.readInt();
-        this.latitude = in.readDouble();
-        this.longitude = in.readDouble();
+        this.locationLatitude = in.readDouble();
+        this.locationLongitude = in.readDouble();
+        this.locationAddress = in.readString();
     }
 
     public static final Parcelable.Creator<Word> CREATOR = new Parcelable.Creator<Word>() {

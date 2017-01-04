@@ -105,8 +105,8 @@
     <string name="word_title">Title</string>
     <string name="word_title_hint">Enter title</string>
     <string name="word_description">Description</string>
-    <string name="word_type_public">Public</string>
-    <string name="word_type_private">Private</string>
+    <string name="word_type_public">To someone</string>
+    <string name="word_type_private">To me</string>
     <string name="pick_from_contacts">Pick from Contacts</string>
     <string name="contact_name">Contact name</string>
     <string name="contact_phone_number">Phone number</string>

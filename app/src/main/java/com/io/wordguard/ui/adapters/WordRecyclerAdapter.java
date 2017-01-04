@@ -1,6 +1,7 @@
 package com.io.wordguard.ui.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.io.wordguard.R;
 import com.io.wordguard.db.Word;
+import com.io.wordguard.ui.activities.ViewWordActivity;
 import com.io.wordguard.ui.util.DateHelper;
 
 import java.util.ArrayList;
@@ -19,8 +21,10 @@ import java.util.ArrayList;
 public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapter.WordHolder> {
 
     ArrayList<Word> mWords;
+    private Context mContext;
 
-    public WordRecyclerAdapter(ArrayList<Word> mWords) {
+    public WordRecyclerAdapter(Context context, ArrayList<Word> mWords) {
+        this.mContext = context;
         this.mWords = mWords;
     }
 
@@ -31,7 +35,7 @@ public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapte
     }
 
     @Override
-    public void onBindViewHolder(WordHolder holder, int position) {
+    public void onBindViewHolder(final WordHolder holder, int position) {
         Word word = mWords.get(position);
 
         holder.title.setText(word.getTitle());
@@ -56,10 +60,19 @@ public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapte
             holder.contactDetailIcon.setImageResource(R.drawable.ic_email);
         } else holder.contactContainer.setVisibility(View.GONE);
 
-        if (word.getLongitude() != 0 && word.getLatitude() != 0) {
+        if (!TextUtils.isEmpty(word.getLocationAddress())) {
             holder.locationContainer.setVisibility(View.VISIBLE);
-            holder.location.setText(R.string.add_location);
+            holder.location.setText(word.getLocationAddress());
         } else holder.locationContainer.setVisibility(View.GONE);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, ViewWordActivity.class);
+                intent.putExtra(ViewWordActivity.EXTRA_WORD, mWords.get(holder.getAdapterPosition()));
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -104,6 +117,5 @@ public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapte
             locationContainer = (LinearLayout) itemView.findViewById(R.id.word_recycler_item_location_container);
             contactContainer = (LinearLayout) itemView.findViewById(R.id.word_recycler_item_contact_container);
         }
-
     }
 }

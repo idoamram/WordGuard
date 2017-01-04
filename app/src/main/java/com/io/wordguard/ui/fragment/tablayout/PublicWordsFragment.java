@@ -33,7 +33,7 @@ public class PublicWordsFragment extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.others_words_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        adapter = new WordRecyclerAdapter(new ArrayList<Word>());
+        adapter = new WordRecyclerAdapter(getActivity(), new ArrayList<Word>());
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeHelperCallback(getContext(), 0,

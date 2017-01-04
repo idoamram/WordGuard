@@ -10,8 +10,12 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.io.wordguard.R;
+import com.io.wordguard.db.Word;
 
 public class ViewWordActivity extends AppCompatActivity {
+
+    public static final String EXTRA_WORD = "extra_word";
+    private Word mWord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,11 +24,16 @@ public class ViewWordActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mWord = getIntent().getParcelableExtra(EXTRA_WORD);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ViewWordActivity.this, WordEditActivity.class));
+                Intent intent = new Intent(ViewWordActivity.this, WordEditActivity.class);
+                intent.putExtra(WordEditActivity.EXTRA_EDIT_MODE, WordEditActivity.EDIT_MODE_UPDATE);
+                intent.putExtra(WordEditActivity.EXTRA_WORD, mWord);
+                startActivity(intent);
             }
         });
     }

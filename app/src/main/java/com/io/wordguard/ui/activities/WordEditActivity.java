@@ -7,7 +7,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.net.Uri;
+import android.location.Address;
+import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
@@ -25,6 +27,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +39,7 @@ import com.io.wordguard.db.ContentProvider;
 import com.io.wordguard.db.Word;
 import com.simplite.orm.interfaces.BackgroundTaskCallBack;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -45,11 +50,13 @@ public class WordEditActivity extends AppCompatActivity {
     public static final String EXTRA_EDIT_MODE = "extra_edit_mode";
 
     public static final int EDIT_MODE_CREATE = 1;
-    public static final int EDIT_MODE_SAVE = 2;
+    public static final int EDIT_MODE_UPDATE = 2;
 
     private static final int REQUEST_PICK_CONTACT = 123;
     private static final int REQUEST_READ_CONTACTS_PERMISSION = 111;
 
+    private ProgressBar mLocationProgressBar;
+    private ImageView mLocationSearchBtn;
     private TextInputEditText mEditTitle, mEditDescription, mEditLocation,
             mEditContactName, mEditContactPhoneNumber, mEditContactMail;
     private Spinner mEditWordTypeSpinner;
@@ -87,6 +94,14 @@ public class WordEditActivity extends AppCompatActivity {
         mEditContactPhoneNumber = (TextInputEditText) findViewById(R.id.word_edit_contact_number_title);
         mEditContactMail = (TextInputEditText) findViewById(R.id.word_edit_contact_email_title);
         mEditDeadline = (TextView) findViewById(R.id.word_edit_deadline);
+        mLocationProgressBar = (ProgressBar) findViewById(R.id.word_edit_location_progressBar);
+        mLocationSearchBtn = (ImageView) findViewById(R.id.word_edit_location_searchIcon);
+        mLocationSearchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchForAddressLocation(mEditLocation.getText().toString());
+            }
+        });
 
         ArrayAdapter<CharSequence> wordTypeAdapter = ArrayAdapter.createFromResource(this,
                 R.array.word_types, R.layout.spinner_item);
@@ -129,9 +144,62 @@ public class WordEditActivity extends AppCompatActivity {
         mWord = getIntent().getParcelableExtra(EXTRA_WORD);
 
         if (mWord != null) {
-            if (TextUtils.isEmpty(mWord.getTitle())) mEditTitle.setText(mWord.getTitle());
+            if (!TextUtils.isEmpty(mWord.getTitle())) mEditTitle.setText(mWord.getTitle());
             mEditWordTypeSpinner.setSelection(mWord.getType());
         }
+    }
+
+    private void searchForAddressLocation(final String address) {
+        new AsyncTask<Void,Void,Boolean>() {
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                switchViewVisibility(View.VISIBLE, View.INVISIBLE);
+            }
+
+            @Override
+            protected Boolean doInBackground(Void... voids) {
+                Geocoder geocoder = new Geocoder(getApplicationContext());
+                try {
+                    List<Address> results = geocoder.getFromLocationName(address, 1);
+                    if (results != null && results.size() > 0) {
+                        results.get(0).getLongitude();
+
+                        if (mWord == null) mWord = new Word(getApplicationContext());
+                        mWord.setLocationAddress(address);
+                        mWord.setLocationLatitude(results.get(0).getLatitude());
+                        mWord.setLocationLongitude(results.get(0).getLongitude());
+                        return true;
+                    } else return false;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(Boolean isSucceeded) {
+                super.onPostExecute(isSucceeded);
+                switchViewVisibility(View.INVISIBLE, View.VISIBLE);
+
+                if (!isSucceeded) {
+                    new AlertDialog.Builder(WordEditActivity.this)
+                            .setMessage("Location not found")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            }).show();
+                }
+            }
+
+            private void switchViewVisibility(int progressBarVisibility, int searchBtnVisibility) {
+                mLocationSearchBtn.setVisibility(searchBtnVisibility);
+                mLocationProgressBar.setVisibility(progressBarVisibility);
+            }
+        }.execute();
     }
 
     private boolean isFieldsFull() {
@@ -288,7 +356,7 @@ public class WordEditActivity extends AppCompatActivity {
                     Toast.makeText(WordEditActivity.this, "Error", Toast.LENGTH_LONG).show();
                 }
             });
-        } else if (mEditMode == EDIT_MODE_SAVE) {
+        } else if (mEditMode == EDIT_MODE_UPDATE) {
             mWord.saveInBackground(this, true, new BackgroundTaskCallBack() {
                 @Override
                 public void onSuccess(String result, List<Object> data) {
