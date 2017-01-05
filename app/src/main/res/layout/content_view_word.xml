@@ -8,10 +8,288 @@
     tools:context=".ui.activities.ViewWordActivity"
     tools:showIn="@layout/activity_view_word">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="@string/large_text" />
+        android:orientation="vertical">
+
+        <!--*****************Type*****************-->
+        <RelativeLayout
+            android:id="@+id/word_view_type_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="64dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <ImageView
+                android:id="@+id/word_view_type_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:contentDescription="@null"
+                app:srcCompat="@drawable/ic_group" />
+
+            <TextView
+                android:id="@+id/word_view_type_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/word_view_type_icon"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="?android:textColorPrimary" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_color" />
+
+        <!--*****************Description*****************-->
+        <RelativeLayout
+            android:id="@+id/word_view_description_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="64dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <ImageView
+                android:id="@+id/word_view_description_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:contentDescription="@null"
+                app:srcCompat="@drawable/ic_description" />
+
+            <TextView
+                android:id="@+id/word_view_description_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/word_view_description_icon"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="?android:textColorPrimary" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_color" />
+
+        <!--*****************Deadline*****************-->
+        <RelativeLayout
+            android:id="@+id/word_view_deadline_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:minHeight="64dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <ImageView
+                android:id="@+id/word_view_deadline_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:contentDescription="@null"
+                app:srcCompat="@drawable/ic_calendar" />
+
+            <TextView
+                android:id="@+id/word_view_deadline_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/word_view_deadline_icon"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="?android:textColorPrimary" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_color" />
+
+        <!--*****************Location*****************-->
+        <RelativeLayout
+            android:id="@+id/word_view_location_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="64dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <ImageView
+                android:id="@+id/word_view_location_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:contentDescription="@null"
+                app:srcCompat="@drawable/ic_location" />
+
+            <TextView
+                android:id="@+id/word_view_location_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/word_view_location_icon"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="?android:textColorPrimary" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_color" />
+
+        <!--*****************Contact Name*****************-->
+        <RelativeLayout
+            android:id="@+id/word_view_contact_name_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="64dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <ImageView
+                android:id="@+id/word_view_contact_name_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:contentDescription="@null"
+                app:srcCompat="@drawable/ic_font" />
+
+            <TextView
+                android:id="@+id/word_view_contact_name_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/word_view_contact_name_icon"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="?android:textColorPrimary" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_color" />
+
+        <!--*****************Contact Number*****************-->
+        <RelativeLayout
+            android:id="@+id/word_view_contact_number_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="64dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <ImageView
+                android:id="@+id/word_view_contact_number_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:contentDescription="@null"
+                app:srcCompat="@drawable/ic_phone" />
+
+            <TextView
+                android:id="@+id/word_view_contact_number_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/word_view_contact_number_icon"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="?android:textColorPrimary" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_color" />
+
+        <!--*****************Contact Email*****************-->
+        <RelativeLayout
+            android:id="@+id/word_view_contact_email_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="64dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <ImageView
+                android:id="@+id/word_view_contact_email_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:contentDescription="@null"
+                app:srcCompat="@drawable/ic_email" />
+
+            <TextView
+                android:id="@+id/word_view_contact_email_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/word_view_contact_email_icon"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="?android:textColorPrimary" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_color" />
+
+        <!--*****************Attachment*****************-->
+        <RelativeLayout
+            android:id="@+id/word_view_attachment_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:minHeight="64dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/word_view_attachment_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:contentDescription="@null"
+                app:srcCompat="@drawable/ic_attach_file" />
+
+            <TextView
+                android:id="@+id/word_view_attachment_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/word_view_attachment_icon"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="?android:textColorPrimary" />
+        </RelativeLayout>
+    </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>
