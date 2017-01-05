@@ -33,6 +33,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.io.wordguard.Constants;
 import com.io.wordguard.R;
 import com.io.wordguard.db.ContentProvider;
@@ -56,7 +57,7 @@ public class WordEditActivity extends AppCompatActivity {
     private static final int REQUEST_READ_CONTACTS_PERMISSION = 111;
 
     private ProgressBar mLocationProgressBar;
-    private ImageView mLocationSearchBtn;
+    private ImageView mLocationSearchBtn, mLocationMapPreview;
     private TextInputEditText mEditTitle, mEditDescription, mEditLocation,
             mEditContactName, mEditContactPhoneNumber, mEditContactMail;
     private Spinner mEditWordTypeSpinner;
@@ -96,6 +97,7 @@ public class WordEditActivity extends AppCompatActivity {
         mEditDeadline = (TextView) findViewById(R.id.word_edit_deadline);
         mLocationProgressBar = (ProgressBar) findViewById(R.id.word_edit_location_progressBar);
         mLocationSearchBtn = (ImageView) findViewById(R.id.word_edit_location_searchIcon);
+        mLocationMapPreview = (ImageView) findViewById(R.id.word_edit_map_image_preview);
         mLocationSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -150,7 +152,7 @@ public class WordEditActivity extends AppCompatActivity {
     }
 
     private void searchForAddressLocation(final String address) {
-        new AsyncTask<Void,Void,Boolean>() {
+        new AsyncTask<Void, Void, Boolean>() {
 
             @Override
             protected void onPreExecute() {
@@ -183,6 +185,11 @@ public class WordEditActivity extends AppCompatActivity {
                 super.onPostExecute(isSucceeded);
                 switchViewVisibility(View.INVISIBLE, View.VISIBLE);
 
+                if (isSucceeded) {
+                    Glide.with(WordEditActivity.this).load(getMapImageFromCoordinates()).into(mLocationMapPreview);
+                    mLocationMapPreview.setVisibility(View.VISIBLE);
+                }
+
                 if (!isSucceeded) {
                     new AlertDialog.Builder(WordEditActivity.this)
                             .setMessage("Location not found")
@@ -192,6 +199,7 @@ public class WordEditActivity extends AppCompatActivity {
                                     dialogInterface.dismiss();
                                 }
                             }).show();
+                    mLocationMapPreview.setVisibility(View.GONE);
                 }
             }
 
@@ -246,6 +254,13 @@ public class WordEditActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    private String getMapImageFromCoordinates() {
+        return "https://maps.googleapis.com/maps/api/staticmap?center=" +
+                mWord.getLocationLatitude() + "," + mWord.getLocationLongitude() +
+                "&markers=color:red%7C" + mWord.getLocationLatitude() + "," + mWord.getLocationLongitude() +
+                "&zoom=15&size=600x300&key=" + getString(R.string.google_maps_key);
     }
 
     private void startPickFromContacts() {
