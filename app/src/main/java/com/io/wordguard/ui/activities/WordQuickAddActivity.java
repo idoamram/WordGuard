@@ -128,7 +128,7 @@ public class WordQuickAddActivity extends AppCompatActivity {
         Word word = new Word(WordQuickAddActivity.this);
 
         if (TextUtils.isEmpty(mTitle.getText())) word.setTitle(mTitle.getText().toString());
-        if (mDeadlineLong > 0) word.setDeadLine(new Date(mDeadlineLong));
+        if (mDeadlineLong > 0) word.setDeadLine(mDeadlineLong);
         word.setType(mTypeSpinner.getSelectedItemPosition());
 
         Intent intent = new Intent(WordQuickAddActivity.this, WordEditActivity.class);

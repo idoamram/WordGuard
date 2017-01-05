@@ -64,6 +64,7 @@ public class WordEditActivity extends AppCompatActivity {
     private TextView mEditDeadline;
     private Calendar mCalendar;
     private long mDeadlineLong;
+    private double mLocationLatitude, mLocationLongitude;
 
     private Word mWord;
     private int mEditMode;
@@ -169,9 +170,8 @@ public class WordEditActivity extends AppCompatActivity {
                         results.get(0).getLongitude();
 
                         if (mWord == null) mWord = new Word(getApplicationContext());
-                        mWord.setLocationAddress(address);
-                        mWord.setLocationLatitude(results.get(0).getLatitude());
-                        mWord.setLocationLongitude(results.get(0).getLongitude());
+                        mLocationLatitude = results.get(0).getLatitude();
+                        mLocationLongitude = results.get(0).getLongitude();
                         return true;
                     } else return false;
                 } catch (IOException e) {
@@ -258,9 +258,9 @@ public class WordEditActivity extends AppCompatActivity {
 
     private String getMapImageFromCoordinates() {
         return "https://maps.googleapis.com/maps/api/staticmap?center=" +
-                mWord.getLocationLatitude() + "," + mWord.getLocationLongitude() +
-                "&markers=color:red%7C" + mWord.getLocationLatitude() + "," + mWord.getLocationLongitude() +
-                "&zoom=15&size=600x300&key=" + getString(R.string.google_maps_key);
+                mLocationLatitude + "," + mLocationLongitude + "&markers=color:red%7C" +
+                mLocationLatitude + "," + mLocationLongitude + "&zoom=15&size=600x300&key=" +
+                 getString(R.string.google_maps_key);
     }
 
     private void startPickFromContacts() {
@@ -399,7 +399,13 @@ public class WordEditActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(mEditDescription.getText()))
             mWord.setDescription(mEditDescription.getText().toString());
         if (mDeadlineLong > 0)
-            mWord.setDeadLine(new Date(mDeadlineLong));
+            mWord.setDeadLine(mDeadlineLong);
+        if (!TextUtils.isEmpty(mEditLocation.getText()))
+            mWord.setLocationAddress(mEditLocation.getText().toString());
+        if (mLocationLongitude != 0)
+            mWord.setLocationLongitude(mLocationLongitude);
+        if (mLocationLatitude != 0)
+            mWord.setLocationLatitude(mLocationLatitude);
         if (!TextUtils.isEmpty(mEditContactName.getText()))
             mWord.setContactName(mEditContactName.getText().toString());
         if (!TextUtils.isEmpty(mEditContactPhoneNumber.getText()))

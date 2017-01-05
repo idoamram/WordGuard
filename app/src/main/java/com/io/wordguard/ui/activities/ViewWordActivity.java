@@ -1,6 +1,7 @@
 package com.io.wordguard.ui.activities;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -56,7 +57,7 @@ public class ViewWordActivity extends AppCompatActivity {
             if (mWord.getDescription() != null) {
                 mViewDescription.setText(mWord.getDescription());
             }
-            if (mWord.getDeadLine() != null) {
+            if (mWord.getDeadLine() > 0) {
                 mViewDeadline.setText(DateFormat.getDateFormat(
                         getApplicationContext()).format(mWord.getDeadLine()));
             }
@@ -65,6 +66,7 @@ public class ViewWordActivity extends AppCompatActivity {
             }
             if (mWord.getLocationLatitude() != 0 && mWord.getLocationLongitude() != 0) {
                 Glide.with(this).load(getMapImageFromCoordinates()).into(mToolbarImage);
+                findViewById(R.id.scrim).setVisibility(View.VISIBLE);
             }
             if (mWord.getContactName() != null) {
                 mViewContactName.setText(mWord.getContactName());

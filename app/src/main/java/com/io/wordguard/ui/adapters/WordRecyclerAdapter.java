@@ -17,6 +17,7 @@ import com.io.wordguard.ui.activities.ViewWordActivity;
 import com.io.wordguard.ui.util.DateHelper;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapter.WordHolder> {
 
@@ -39,9 +40,9 @@ public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapte
         Word word = mWords.get(position);
 
         holder.title.setText(word.getTitle());
-        if (word.getDeadLine() != null) {
+        if (word.getDeadLine() > 0) {
             holder.deadLine.setVisibility(View.VISIBLE);
-            holder.deadLine.setText(DateHelper.dateToString(word.getDeadLine(), DateHelper.DATE_FORMAT_ONLY_TIME));
+            holder.deadLine.setText(DateHelper.dateToString(new Date(word.getDeadLine()), DateHelper.DATE_FORMAT_ONLY_TIME));
         } else holder.deadLine.setVisibility(View.GONE);
 
         if (!TextUtils.isEmpty(word.getContactName())) {

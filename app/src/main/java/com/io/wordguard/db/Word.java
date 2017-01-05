@@ -9,11 +9,13 @@ import com.simplite.orm.DBObject;
 import com.simplite.orm.annotations.Column;
 import com.simplite.orm.annotations.Entity;
 import com.simplite.orm.annotations.PrimaryKey;
+
 import java.util.Date;
+
 import static com.io.wordguard.db.Word.TABLE_NAME;
 
 @Entity(tableName = TABLE_NAME)
-public class Word extends DBObject implements Parcelable{
+public class Word extends DBObject implements Parcelable {
 
     public static final int TYPE_PRIVATE = 0;
     public static final int TYPE_PUBLIC = 1;
@@ -62,7 +64,7 @@ public class Word extends DBObject implements Parcelable{
     private Date creationTime;
 
     @Column(name = COL_DEAD_LINE)
-    private Date deadLine;
+    private long deadLine;
 
     @Column(name = COL_CONTACT_ID)
     private String contactId;
@@ -133,11 +135,11 @@ public class Word extends DBObject implements Parcelable{
         this.creationTime = creationTime;
     }
 
-    public Date getDeadLine() {
+    public long getDeadLine() {
         return deadLine;
     }
 
-    public void setDeadLine(Date deadLine) {
+    public void setDeadLine(long deadLine) {
         this.deadLine = deadLine;
     }
 
@@ -212,7 +214,7 @@ public class Word extends DBObject implements Parcelable{
         parcel.writeString(description);
         parcel.writeInt(type);
         parcel.writeString(DateHelper.dateToString(creationTime));
-        parcel.writeString(DateHelper.dateToString(deadLine));
+        parcel.writeLong(deadLine);
         parcel.writeString(contactId);
         parcel.writeString(contactName);
         parcel.writeString(contactPhoneNumber);
@@ -234,7 +236,7 @@ public class Word extends DBObject implements Parcelable{
         this.description = in.readString();
         this.type = in.readInt();
         this.creationTime = DateHelper.stringToDate(in.readString());
-        this.deadLine = DateHelper.stringToDate(in.readString());
+        this.deadLine = in.readLong();
         this.contactId = in.readString();
         this.contactName = in.readString();
         this.contactPhoneNumber = in.readString();
