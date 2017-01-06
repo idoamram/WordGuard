@@ -37,8 +37,8 @@ import com.bumptech.glide.Glide;
 import com.io.wordguard.Constants;
 import com.io.wordguard.R;
 import com.io.wordguard.db.ContentProvider;
-import com.io.wordguard.db.Word;
-import com.simplite.orm.interfaces.BackgroundTaskCallBack;
+import com.io.wordguard.word.Word;
+import com.io.wordguard.db.simplite.interfaces.CRUDCallback;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -359,29 +359,23 @@ public class WordEditActivity extends AppCompatActivity {
     public void saveWord() {
         getDataFromFields();
         if (mEditMode == EDIT_MODE_CREATE) {
-            mWord.createInBackground(this, true, new BackgroundTaskCallBack() {
+            mWord.createInBackground(this, true, new CRUDCallback() {
                 @Override
-                public void onSuccess(String result, List<Object> data) {
-                    Toast.makeText(WordEditActivity.this, "Success", Toast.LENGTH_LONG).show();
-                    ContentProvider.getInstance().releaseAll();
-                }
-
-                @Override
-                public void onError(String error) {
-                    Toast.makeText(WordEditActivity.this, "Error", Toast.LENGTH_LONG).show();
+                public void onFinish(Object extra, Exception e) {
+                    if (e == null) {
+                        Toast.makeText(WordEditActivity.this, "Success ID: " + extra, Toast.LENGTH_LONG).show();
+                        ContentProvider.getInstance().releaseAll();
+                    } else Toast.makeText(WordEditActivity.this, "Error", Toast.LENGTH_LONG).show();
                 }
             });
         } else if (mEditMode == EDIT_MODE_UPDATE) {
-            mWord.saveInBackground(this, true, new BackgroundTaskCallBack() {
+            mWord.saveInBackground(this, true, new CRUDCallback() {
                 @Override
-                public void onSuccess(String result, List<Object> data) {
-                    Toast.makeText(WordEditActivity.this, "Success", Toast.LENGTH_LONG).show();
-                    ContentProvider.getInstance().releaseAll();
-                }
-
-                @Override
-                public void onError(String error) {
-                    Toast.makeText(WordEditActivity.this, "Error", Toast.LENGTH_LONG).show();
+                public void onFinish(Object extra, Exception e) {
+                    if (e == null) {
+                        Toast.makeText(WordEditActivity.this, "Success", Toast.LENGTH_LONG).show();
+                        ContentProvider.getInstance().releaseAll();
+                    } else Toast.makeText(WordEditActivity.this, "Error", Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -399,7 +393,7 @@ public class WordEditActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(mEditDescription.getText()))
             mWord.setDescription(mEditDescription.getText().toString());
         if (mDeadlineLong > 0)
-            mWord.setDeadLine(mDeadlineLong);
+            mWord.setDeadLine(new Date(mDeadlineLong));
         if (!TextUtils.isEmpty(mEditLocation.getText()))
             mWord.setLocationAddress(mEditLocation.getText().toString());
         if (mLocationLongitude != 0)

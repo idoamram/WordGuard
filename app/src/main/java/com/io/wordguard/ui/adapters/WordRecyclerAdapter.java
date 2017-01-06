@@ -12,12 +12,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.io.wordguard.R;
-import com.io.wordguard.db.Word;
+import com.io.wordguard.word.Word;
 import com.io.wordguard.ui.activities.ViewWordActivity;
 import com.io.wordguard.ui.util.DateHelper;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapter.WordHolder> {
 
@@ -40,9 +39,9 @@ public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapte
         Word word = mWords.get(position);
 
         holder.title.setText(word.getTitle());
-        if (word.getDeadLine() > 0) {
+        if (word.getDeadLine() != null) {
             holder.deadLine.setVisibility(View.VISIBLE);
-            holder.deadLine.setText(DateHelper.dateToString(new Date(word.getDeadLine()), DateHelper.DATE_FORMAT_ONLY_TIME));
+            holder.deadLine.setText(DateHelper.dateToString(word.getDeadLine(), DateHelper.DATE_FORMAT_ONLY_TIME));
         } else holder.deadLine.setVisibility(View.GONE);
 
         if (!TextUtils.isEmpty(word.getContactName())) {
@@ -96,6 +95,8 @@ public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapte
         mWords = data;
         notifyDataSetChanged();
     }
+
+    public Word getWordAt(int position) {return mWords.get(position);}
 
     class WordHolder extends RecyclerView.ViewHolder{
 

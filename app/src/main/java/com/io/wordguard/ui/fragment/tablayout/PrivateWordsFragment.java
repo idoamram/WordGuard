@@ -13,11 +13,12 @@ import android.view.ViewGroup;
 import com.io.wordguard.R;
 import com.io.wordguard.db.ContentProvider;
 import com.io.wordguard.db.ContentProviderCallBack;
-import com.io.wordguard.db.Word;
+import com.io.wordguard.word.Word;
 import com.io.wordguard.ui.adapters.WordRecyclerAdapter;
 import com.io.wordguard.ui.util.SwipeCallback;
 import com.io.wordguard.ui.util.SwipeHelperCallback;
-import com.simplite.orm.DBObject;
+import com.io.wordguard.db.simplite.DBObject;
+import com.io.wordguard.word.WordHelper;
 
 import java.util.ArrayList;
 
@@ -39,8 +40,9 @@ public class PrivateWordsFragment extends Fragment {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeHelperCallback(getContext(), 0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, new SwipeCallback() {
             @Override
-            public void onSwiped(boolean isSwipedRight, int itemPosition) {
-                adapter.removeItem(itemPosition);
+            public void onSwiped(boolean isSwipedRight, final int itemPosition) {
+                WordHelper.changeStatus(isSwipedRight ? Word.STATUS_DONE : Word.STATUS_TRASH,
+                        getActivity(), adapter, itemPosition);
             }
         }));
         itemTouchHelper.attachToRecyclerView(recyclerView);

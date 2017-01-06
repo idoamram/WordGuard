@@ -2,10 +2,11 @@ package com.io.wordguard.db;
 
 import android.content.Context;
 
-import com.simplite.orm.interfaces.BackgroundTaskCallBack;
+import com.io.wordguard.db.simplite.DBObject;
+import com.io.wordguard.db.simplite.interfaces.FindAllCallback;
+import com.io.wordguard.word.Word;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ContentProvider {
 
@@ -30,18 +31,13 @@ public class ContentProvider {
         if (allWords != null && allWords.size() > 0) callback.onFinish(allWords, null, null);
         else {
             Word.findByColumnInBackground(true, Word.COL_STATUS, Word.STATUS_ACTIVE, Word.COL_DEAD_LINE,
-                    context, Word.class, new BackgroundTaskCallBack() {
+                    context, Word.class, new FindAllCallback() {
                         @Override
-                        public void onSuccess(String result, List<Object> data) {
-                            if (data != null && data.size() > 0) {
-                                allWords = (ArrayList) data;
+                        public void onFinish(ArrayList<? extends DBObject> data, Object extra, Exception e) {
+                            if (e == null) {
+                                allWords = (ArrayList<Word>) data;
                                 callback.onFinish(allWords, null, null);
-                            } else callback.onFinish(null, null, new Exception());
-                        }
-
-                        @Override
-                        public void onError(String error) {
-                            callback.onFinish(null, null, new Exception(error));
+                            } else callback.onFinish(null, null, e);
                         }
                     });
         }
@@ -53,18 +49,13 @@ public class ContentProvider {
             Word.queryInBackground(Word.class, context, true,
                     new String[]{Word.COL_TYPE, Word.COL_STATUS},
                     new String[]{String.valueOf(Word.TYPE_PRIVATE), String.valueOf(Word.STATUS_ACTIVE)},
-                    Word.COL_DEAD_LINE, new BackgroundTaskCallBack() {
+                    Word.COL_DEAD_LINE, new FindAllCallback() {
                         @Override
-                        public void onSuccess(String result, List<Object> data) {
-                            if (data != null && data.size() > 0) {
-                                privateWords = (ArrayList) data;
+                        public void onFinish(ArrayList<? extends DBObject> data, Object extra, Exception e) {
+                            if (e == null) {
+                                privateWords = (ArrayList<Word>) data;
                                 callback.onFinish(privateWords, null, null);
-                            } else callback.onFinish(null, null, new Exception());
-                        }
-
-                        @Override
-                        public void onError(String error) {
-                            callback.onFinish(null, null, new Exception(error));
+                            } else callback.onFinish(null, null, e);
                         }
                     });
         }
@@ -76,18 +67,13 @@ public class ContentProvider {
             Word.queryInBackground(Word.class, context, true,
                     new String[]{Word.COL_TYPE, Word.COL_STATUS},
                     new String[]{String.valueOf(Word.TYPE_PUBLIC), String.valueOf(Word.STATUS_ACTIVE)},
-                    Word.COL_DEAD_LINE, new BackgroundTaskCallBack() {
+                    Word.COL_DEAD_LINE, new FindAllCallback() {
                         @Override
-                        public void onSuccess(String result, List<Object> data) {
-                            if (data != null && data.size() > 0) {
-                                publicWords = (ArrayList) data;
+                        public void onFinish(ArrayList<? extends DBObject> data, Object extra, Exception e) {
+                            if (e == null) {
+                                publicWords = (ArrayList<Word>) data;
                                 callback.onFinish(publicWords, null, null);
-                            } else callback.onFinish(null, null, new Exception());
-                        }
-
-                        @Override
-                        public void onError(String error) {
-                            callback.onFinish(null, null, new Exception(error));
+                            } else callback.onFinish(null, null, e);
                         }
                     });
         }
@@ -97,18 +83,13 @@ public class ContentProvider {
         if (doneWords != null && doneWords.size() > 0) callback.onFinish(doneWords, null, null);
         else {
             Word.findByColumnInBackground(true, Word.COL_STATUS, Word.STATUS_DONE, Word.COL_DEAD_LINE,
-                    context, Word.class, new BackgroundTaskCallBack() {
+                    context, Word.class, new FindAllCallback() {
                         @Override
-                        public void onSuccess(String result, List<Object> data) {
-                            if (data != null && data.size() > 0) {
-                                doneWords = (ArrayList) data;
+                        public void onFinish(ArrayList<? extends DBObject> data, Object extra, Exception e) {
+                            if (e == null) {
+                                doneWords = (ArrayList<Word>) data;
                                 callback.onFinish(doneWords, null, null);
-                            } else callback.onFinish(null, null, new Exception());
-                        }
-
-                        @Override
-                        public void onError(String error) {
-                            callback.onFinish(null, null, new Exception(error));
+                            } else callback.onFinish(null, null, e);
                         }
                     });
         }
@@ -118,18 +99,13 @@ public class ContentProvider {
         if (trashedWords != null && trashedWords.size() > 0) callback.onFinish(trashedWords, null, null);
         else {
             Word.findByColumnInBackground(true, Word.COL_STATUS, Word.STATUS_TRASH, Word.COL_DEAD_LINE,
-                    context, Word.class, new BackgroundTaskCallBack() {
+                    context, Word.class, new FindAllCallback() {
                         @Override
-                        public void onSuccess(String result, List<Object> data) {
-                            if (data != null && data.size() > 0) {
-                                trashedWords = (ArrayList) data;
+                        public void onFinish(ArrayList<? extends DBObject> data, Object extra, Exception e) {
+                            if (e == null) {
+                                trashedWords = (ArrayList<Word>) data;
                                 callback.onFinish(trashedWords, null, null);
-                            } else callback.onFinish(null, null, new Exception());
-                        }
-
-                        @Override
-                        public void onError(String error) {
-                            callback.onFinish(null, null, new Exception(error));
+                            } else callback.onFinish(null, null, e);
                         }
                     });
         }

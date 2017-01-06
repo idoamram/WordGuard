@@ -1,21 +1,19 @@
-package com.io.wordguard.db;
+package com.io.wordguard.word;
 
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.io.wordguard.ui.util.DateHelper;
-import com.simplite.orm.DBObject;
-import com.simplite.orm.annotations.Column;
-import com.simplite.orm.annotations.Entity;
-import com.simplite.orm.annotations.PrimaryKey;
-
+import com.io.wordguard.db.simplite.DBObject;
+import com.io.wordguard.db.simplite.annotations.Column;
+import com.io.wordguard.db.simplite.annotations.Entity;
+import com.io.wordguard.db.simplite.annotations.PrimaryKey;
 import java.util.Date;
-
-import static com.io.wordguard.db.Word.TABLE_NAME;
+import static com.io.wordguard.word.Word.TABLE_NAME;
 
 @Entity(tableName = TABLE_NAME)
-public class Word extends DBObject implements Parcelable {
+public class Word extends DBObject implements Parcelable{
 
     public static final int TYPE_PRIVATE = 0;
     public static final int TYPE_PUBLIC = 1;
@@ -64,7 +62,7 @@ public class Word extends DBObject implements Parcelable {
     private Date creationTime;
 
     @Column(name = COL_DEAD_LINE)
-    private long deadLine;
+    private Date deadLine;
 
     @Column(name = COL_CONTACT_ID)
     private String contactId;
@@ -135,11 +133,11 @@ public class Word extends DBObject implements Parcelable {
         this.creationTime = creationTime;
     }
 
-    public long getDeadLine() {
+    public Date getDeadLine() {
         return deadLine;
     }
 
-    public void setDeadLine(long deadLine) {
+    public void setDeadLine(Date deadLine) {
         this.deadLine = deadLine;
     }
 
@@ -214,7 +212,7 @@ public class Word extends DBObject implements Parcelable {
         parcel.writeString(description);
         parcel.writeInt(type);
         parcel.writeString(DateHelper.dateToString(creationTime));
-        parcel.writeLong(deadLine);
+        parcel.writeString(DateHelper.dateToString(deadLine));
         parcel.writeString(contactId);
         parcel.writeString(contactName);
         parcel.writeString(contactPhoneNumber);
@@ -236,7 +234,7 @@ public class Word extends DBObject implements Parcelable {
         this.description = in.readString();
         this.type = in.readInt();
         this.creationTime = DateHelper.stringToDate(in.readString());
-        this.deadLine = in.readLong();
+        this.deadLine = DateHelper.stringToDate(in.readString());
         this.contactId = in.readString();
         this.contactName = in.readString();
         this.contactPhoneNumber = in.readString();

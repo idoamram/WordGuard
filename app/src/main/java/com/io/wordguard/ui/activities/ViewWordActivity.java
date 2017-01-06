@@ -1,7 +1,6 @@
 package com.io.wordguard.ui.activities;
 
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -16,7 +15,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.io.wordguard.R;
-import com.io.wordguard.db.Word;
+import com.io.wordguard.word.Word;
 
 public class ViewWordActivity extends AppCompatActivity {
 
@@ -57,7 +56,7 @@ public class ViewWordActivity extends AppCompatActivity {
             if (mWord.getDescription() != null) {
                 mViewDescription.setText(mWord.getDescription());
             }
-            if (mWord.getDeadLine() > 0) {
+            if (mWord.getDeadLine() != null) {
                 mViewDeadline.setText(DateFormat.getDateFormat(
                         getApplicationContext()).format(mWord.getDeadLine()));
             }

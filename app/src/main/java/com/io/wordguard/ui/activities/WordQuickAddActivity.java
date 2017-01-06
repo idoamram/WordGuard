@@ -23,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.io.wordguard.R;
-import com.io.wordguard.db.Word;
+import com.io.wordguard.word.Word;
 import com.io.wordguard.ui.transitions.FabTransform;
 import com.io.wordguard.ui.transitions.MorphTransform;
 
@@ -128,7 +128,8 @@ public class WordQuickAddActivity extends AppCompatActivity {
         Word word = new Word(WordQuickAddActivity.this);
 
         if (TextUtils.isEmpty(mTitle.getText())) word.setTitle(mTitle.getText().toString());
-        if (mDeadlineLong > 0) word.setDeadLine(mDeadlineLong);
+        if (mDeadlineLong > 0) word.setDeadLine(new Date(mDeadlineLong));
+
         word.setType(mTypeSpinner.getSelectedItemPosition());
 
         Intent intent = new Intent(WordQuickAddActivity.this, WordEditActivity.class);

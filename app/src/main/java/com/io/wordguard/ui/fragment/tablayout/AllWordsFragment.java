@@ -1,7 +1,6 @@
 package com.io.wordguard.ui.fragment.tablayout;
 
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,16 +14,15 @@ import android.widget.Toast;
 import com.io.wordguard.R;
 import com.io.wordguard.db.ContentProvider;
 import com.io.wordguard.db.ContentProviderCallBack;
-import com.io.wordguard.db.Word;
+import com.io.wordguard.word.Word;
+import com.io.wordguard.db.simplite.DBObject;
+import com.io.wordguard.db.simplite.interfaces.CRUDCallback;
 import com.io.wordguard.ui.adapters.WordRecyclerAdapter;
 import com.io.wordguard.ui.util.SwipeCallback;
 import com.io.wordguard.ui.util.SwipeHelperCallback;
-import com.simplite.orm.DBObject;
-import com.simplite.orm.interfaces.BackgroundTaskCallBack;
+import com.io.wordguard.word.WordHelper;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class AllWordsFragment extends Fragment {
 
@@ -44,8 +42,9 @@ public class AllWordsFragment extends Fragment {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeHelperCallback(getContext(), 0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, new SwipeCallback() {
             @Override
-            public void onSwiped(boolean isSwipedRight, int itemPosition) {
-                adapter.removeItem(itemPosition);
+            public void onSwiped(boolean isSwipedRight, final int itemPosition) {
+                WordHelper.changeStatus(isSwipedRight ? Word.STATUS_DONE : Word.STATUS_TRASH,
+                        getActivity(), adapter, itemPosition);
             }
         }));
         itemTouchHelper.attachToRecyclerView(recyclerView);

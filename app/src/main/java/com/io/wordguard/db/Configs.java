@@ -3,7 +3,7 @@ package com.io.wordguard.db;
 import android.content.Context;
 import android.util.Log;
 
-import com.simplite.orm.interfaces.SimpLiteConfiguration;
+import com.io.wordguard.db.simplite.interfaces.SimpLiteConfiguration;
 
 public class Configs implements SimpLiteConfiguration {
     @Override
