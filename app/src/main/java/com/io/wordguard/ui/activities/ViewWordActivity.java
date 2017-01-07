@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -55,13 +56,19 @@ public class ViewWordActivity extends AppCompatActivity {
             }
             if (mWord.getDescription() != null) {
                 mViewDescription.setText(mWord.getDescription());
+            } else {
+                ((RelativeLayout) mViewDescription.getParent()).setVisibility(View.GONE);
             }
             if (mWord.getDeadLine() != null) {
                 mViewDeadline.setText(DateFormat.getDateFormat(
                         getApplicationContext()).format(mWord.getDeadLine()));
+            } else {
+                ((RelativeLayout) mViewDeadline.getParent()).setVisibility(View.GONE);
             }
             if (mWord.getLocationAddress() != null) {
                 mViewLocation.setText(mWord.getLocationAddress());
+            } else {
+                ((RelativeLayout) mViewLocation.getParent()).setVisibility(View.GONE);
             }
             if (mWord.getLocationLatitude() != 0 && mWord.getLocationLongitude() != 0) {
                 Glide.with(this).load(getMapImageFromCoordinates()).into(mToolbarImage);
@@ -69,12 +76,18 @@ public class ViewWordActivity extends AppCompatActivity {
             }
             if (mWord.getContactName() != null) {
                 mViewContactName.setText(mWord.getContactName());
+            } else {
+                ((RelativeLayout) mViewContactName.getParent()).setVisibility(View.GONE);
             }
             if (mWord.getContactPhoneNumber() != null) {
                 mViewContactNumber.setText(mWord.getContactPhoneNumber());
+            } else {
+                ((RelativeLayout) mViewContactNumber.getParent()).setVisibility(View.GONE);
             }
             if (mWord.getContactEmail() != null) {
                 mViewContactEmail.setText(mWord.getContactEmail());
+            } else {
+                ((RelativeLayout) mViewContactEmail.getParent()).setVisibility(View.GONE);
             }
         }
 

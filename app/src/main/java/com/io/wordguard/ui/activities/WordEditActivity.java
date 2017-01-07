@@ -3,12 +3,14 @@ package com.io.wordguard.ui.activities;
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -31,6 +33,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -41,9 +44,11 @@ import com.io.wordguard.word.Word;
 import com.io.wordguard.db.simplite.interfaces.CRUDCallback;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class WordEditActivity extends AppCompatActivity {
 
@@ -84,7 +89,12 @@ public class WordEditActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                if (isFieldsFull()) {
+                    new ConfirmDiscardDialog().show(getSupportFragmentManager(),
+                            Constants.DIALOG_FRAGMENT_CONFIRM_WORD_EDIT_DISCARD);
+                } else {
+                    finish();
+                }
             }
         });
 
@@ -106,6 +116,25 @@ public class WordEditActivity extends AppCompatActivity {
             }
         });
 
+        // Get intent, action and MIME type
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
+
+        if (Intent.ACTION_SEND.equals(action) && type != null) {
+            if ("text/plain".equals(type)) {
+                handleSendText(intent); // Handle text being sent
+            } else if (type.startsWith("image/")) {
+                handleSendImage(intent); // Handle single image being sent
+            }
+        } else if (Intent.ACTION_SEND_MULTIPLE.equals(action) && type != null) {
+            if (type.startsWith("image/")) {
+                handleSendMultipleImages(intent); // Handle multiple images being sent
+            }
+        } else {
+            // Handle other intents, such as being started from the home screen
+        }
+
         ArrayAdapter<CharSequence> wordTypeAdapter = ArrayAdapter.createFromResource(this,
                 R.array.word_types, R.layout.spinner_item);
         wordTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -121,7 +150,7 @@ public class WordEditActivity extends AppCompatActivity {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-                                // Get dates from dialog picker
+                                // Set dates from dialog picker
                                 mCalendar.set(Calendar.YEAR, year);
                                 mCalendar.set(Calendar.MONTH, monthOfYear);
                                 mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -130,11 +159,23 @@ public class WordEditActivity extends AppCompatActivity {
                                 mCalendar.set(Calendar.MINUTE, 0);
                                 mCalendar.set(Calendar.SECOND, 0);
                                 mCalendar.set(Calendar.MILLISECOND, 0);
-                                // Update text
-                                mEditDeadline.setText(DateFormat.getDateFormat(
-                                        getApplicationContext()).format(mCalendar.getTime()));
-                                // Save start date long
-                                mDeadlineLong = mCalendar.getTimeInMillis();
+                                // Open time picker dialog
+                                TimePickerDialog timePickerDialog = new TimePickerDialog(WordEditActivity.this,
+                                        new TimePickerDialog.OnTimeSetListener() {
+                                            @Override
+                                            public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+                                                // Set time from time picker
+                                                mCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                                                mCalendar.set(Calendar.MINUTE, minute);
+                                                // Update text
+                                                mEditDeadline.setText(DateFormat.getDateFormat(
+                                                        getApplicationContext()).format(mCalendar.getTime()) + ", " +
+                                                        String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute));
+                                                // Save deadline long from date picker and time picker
+                                                mDeadlineLong = mCalendar.getTimeInMillis();
+                                            }
+                                        }, mCalendar.get(Calendar.HOUR_OF_DAY), mCalendar.get(Calendar.MINUTE), true);
+                                timePickerDialog.show();
                             }
                         }, mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH));
                 // Set minimum date to now
@@ -149,6 +190,28 @@ public class WordEditActivity extends AppCompatActivity {
         if (mWord != null) {
             if (!TextUtils.isEmpty(mWord.getTitle())) mEditTitle.setText(mWord.getTitle());
             mEditWordTypeSpinner.setSelection(mWord.getType());
+        }
+    }
+
+    void handleSendText(Intent intent) {
+        String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
+        if (sharedText != null) {
+            // Update UI to reflect text being shared
+            mEditDescription.setText(sharedText);
+        }
+    }
+
+    void handleSendImage(Intent intent) {
+        Uri imageUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+        if (imageUri != null) {
+            // Update UI to reflect image being shared
+        }
+    }
+
+    void handleSendMultipleImages(Intent intent) {
+        ArrayList<Uri> imageUris = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
+        if (imageUris != null) {
+            // Update UI to reflect multiple images being shared
         }
     }
 
@@ -260,7 +323,7 @@ public class WordEditActivity extends AppCompatActivity {
         return "https://maps.googleapis.com/maps/api/staticmap?center=" +
                 mLocationLatitude + "," + mLocationLongitude + "&markers=color:red%7C" +
                 mLocationLatitude + "," + mLocationLongitude + "&zoom=15&size=600x300&key=" +
-                 getString(R.string.google_maps_key);
+                getString(R.string.google_maps_key);
     }
 
     private void startPickFromContacts() {
