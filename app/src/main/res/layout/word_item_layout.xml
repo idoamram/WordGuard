@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/word_recycler_item_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?selectableItemBackground">
+
+    <TextView
+        android:id="@+id/word_recycler_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:paddingLeft="@dimen/spacing_normal"
+        android:paddingRight="@dimen/spacing_normal"
+        android:paddingTop="@dimen/spacing_normal"
+        android:text="This is the title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="?android:textColorPrimary" />
+
+    <ImageButton
+        android:id="@+id/word_recycler_item_call_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/word_recycler_item_attachment"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="?selectableItemBackgroundBorderless"
+        android:padding="@dimen/spacing_normal"
+        app:srcCompat="@drawable/ic_call" />
+
+    <TextView
+        android:id="@+id/word_recycler_item_deadline_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/word_recycler_item_title"
+        android:drawablePadding="@dimen/spacing_micro"
+        android:drawableStart="@drawable/ic_time"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/spacing_normal"
+        android:paddingStart="@dimen/spacing_normal"
+        android:paddingTop="@dimen/spacing_normal"
+        android:text="08:00"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="?android:textColorSecondary" />
+
+    <TextView
+        android:id="@+id/word_recycler_item_deadline_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/word_recycler_item_title"
+        android:layout_toEndOf="@+id/word_recycler_item_deadline_time"
+        android:drawablePadding="@dimen/spacing_micro"
+        android:drawableStart="@drawable/ic_calendar"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/spacing_normal"
+        android:paddingStart="@dimen/spacing_normal"
+        android:paddingTop="@dimen/spacing_normal"
+        android:text="1/1/2017"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="?android:textColorSecondary" />
+
+    <TextView
+        android:id="@+id/word_recycler_item_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/word_recycler_item_title"
+        android:layout_toEndOf="@+id/word_recycler_item_deadline_date"
+        android:layout_toStartOf="@+id/favoriteImgBtn"
+        android:drawablePadding="@dimen/spacing_micro"
+        android:drawableStart="@drawable/ic_location"
+        android:gravity="center_vertical"
+        android:paddingBottom="8dp"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp"
+        android:text="Tel-Aviv"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="?android:textColorSecondary" />
+
+    <ImageView
+        android:id="@+id/word_recycler_item_attachment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/word_recycler_item_title"
+        android:background="?selectableItemBackgroundBorderless"
+        android:padding="@dimen/spacing_normal"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_attachment" />
+</RelativeLayout>
