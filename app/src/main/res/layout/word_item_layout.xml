@@ -10,8 +10,8 @@
         android:id="@+id/word_recycler_category_color"
         android:layout_width="4dp"
         android:layout_height="match_parent"
-        android:background="?colorAccent"
         android:layout_above="@+id/word_recycler_item_divider"
+        android:background="?colorAccent"
         android:visibility="gone" />
 
     <TextView
@@ -28,22 +28,28 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="?android:textColorPrimary" />
 
-    <ImageButton
-        android:id="@+id/word_recycler_item_call_button"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/word_recycler_item_description"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/word_recycler_item_attachment"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:background="?selectableItemBackgroundBorderless"
-        android:padding="@dimen/spacing_normal"
-        app:srcCompat="@drawable/ic_call" />
+        android:layout_below="@+id/word_recycler_item_title"
+        android:layout_toEndOf="@+id/word_recycler_category_color"
+        android:layout_toStartOf="@+id/word_recycler_item_call_button"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:paddingStart="@dimen/spacing_normal"
+        android:paddingTop="@dimen/spacing_micro"
+        android:text="This is the description\nShows preview up to  two lines"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="?android:textColorSecondary"
+        android:textSize="16sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/word_recycler_item_deadline_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/word_recycler_item_title"
+        android:layout_below="@+id/word_recycler_item_description"
         android:layout_toEndOf="@+id/word_recycler_category_color"
         android:drawablePadding="@dimen/spacing_micro"
         android:drawableStart="@drawable/ic_time_18dp"
@@ -60,7 +66,7 @@
         android:id="@+id/word_recycler_item_deadline_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/word_recycler_item_title"
+        android:layout_below="@+id/word_recycler_item_description"
         android:layout_toEndOf="@+id/word_recycler_item_deadline_time"
         android:drawablePadding="@dimen/spacing_micro"
         android:drawableStart="@drawable/ic_calendar_18dp"
@@ -77,7 +83,7 @@
         android:id="@+id/word_recycler_item_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/word_recycler_item_title"
+        android:layout_below="@+id/word_recycler_item_description"
         android:layout_toEndOf="@+id/word_recycler_item_deadline_date"
         android:layout_toStartOf="@+id/word_recycler_item_call_button"
         android:drawablePadding="@dimen/spacing_micro"
@@ -92,16 +98,16 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textColor="?android:textColorSecondary" />
 
-    <ImageView
-        android:id="@+id/word_recycler_item_attachment"
+    <ImageButton
+        android:id="@+id/word_recycler_item_call_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/word_recycler_item_divider"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/word_recycler_item_title"
+        android:layout_marginEnd="@dimen/spacing_micro"
         android:background="?selectableItemBackgroundBorderless"
         android:padding="@dimen/spacing_normal"
-        android:visibility="gone"
-        app:srcCompat="@drawable/ic_attachment" />
+        app:srcCompat="@drawable/ic_call" />
 
     <View
         android:id="@+id/word_recycler_item_divider"
