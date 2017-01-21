@@ -24,51 +24,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activities.WordQuickAddActivity"
-            android:exported="false"
-            android:launchMode="singleTop"
-            android:parentActivityName=".ui.activities.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar.AddWordDialog"
-            android:windowSoftInputMode="adjustResize">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activities.MainActivity" />
-        </activity>
-        <activity
-            android:name=".ui.activities.WordEditActivity"
-            android:excludeFromRecents="true"
-            android:parentActivityName=".ui.activities.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activities.MainActivity" />
-
-            <intent-filter android:label="@string/add_as_word">
-                <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="image/*" />
-            </intent-filter>
-            <intent-filter android:label="@string/add_as_word">
-                <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/plain" />
-            </intent-filter>
-            <intent-filter android:label="@string/add_as_word">
-                <action android:name="android.intent.action.SEND_MULTIPLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="image/*" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.activities.ViewWordActivity"
-            android:label="@string/view_word"
-            android:parentActivityName=".ui.activities.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activities.MainActivity" />
-        </activity>
-        <activity
             android:name=".ui.activities.SettingsActivity"
             android:label="@string/navigation_drawer_settings"
             android:parentActivityName=".ui.activities.MainActivity"
@@ -108,7 +63,7 @@
             android:value="com.io.wordguard.db.Configs" />
         <meta-data
             android:name="ENTITIES_CLASSES_NAME"
-            android:value="com.io.wordguard.db.Word" />
+            android:value="com.io.wordguard.word.Word" />
     </application>
 
 </manifest>

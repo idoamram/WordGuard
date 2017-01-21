@@ -11,6 +11,7 @@ public class DateHelper {
     private static final String DATE_FORMAT = "dd/MM/yy hh:mm";
 
     public static final String DATE_FORMAT_ONLY_TIME = "hh:mm";
+    public static final String DATE_FORMAT_ONLY_DATE = "DD/MM";
 
     public static Date stringToDate(String string) {
         if (string != null) {

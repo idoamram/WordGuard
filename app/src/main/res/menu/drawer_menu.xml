@@ -5,17 +5,10 @@
         android:id="@+id/grp1"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_active"
-            android:icon="@drawable/ic_reminders"
-            android:title="@string/navigation_drawer_active" />
-        <item
-            android:id="@+id/nav_done"
-            android:icon="@drawable/ic_drawer_done"
-            android:title="@string/navigation_drawer_done" />
-        <item
-            android:id="@+id/nav_trash"
-            android:icon="@drawable/ic_drawer_trash"
-            android:title="@string/navigation_drawer_trash" />
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_person"
+            android:title="@string/navigation_drawer_profile" />
+
     </group>
 
     <group android:id="@+id/grp2">
