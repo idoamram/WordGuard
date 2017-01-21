@@ -52,6 +52,7 @@
                 android:value=".ui.activities.MainActivity" />
         </activity>
 
+        <!-- SimpLite -->
         <meta-data
             android:name="DATABASE_NAME"
             android:value="word_guard_db" />

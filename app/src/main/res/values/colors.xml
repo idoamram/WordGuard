@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Relax palettes-->
+    <color name="colorGreen">#8eb9a8</color>
+    <color name="colorYellow">#fefbd0</color>
+    <color name="colorOrange">#fdcfb7</color>
+    <color name="colorRed">#f4828c</color>
+    <color name="colorBrown">#775c6a</color>
+
     <color name="colorPrimary">#4CAF50</color>
     <color name="colorPrimaryDark">#388E3C</color>
     <color name="colorAccent">#009688</color>
+
     <!--Material Design Color Parameters-->
     <color name="primary_text_color">@color/material_light_primary_text</color>
     <color name="primary_text_color_inverse">@color/material_dark_primary_text</color>

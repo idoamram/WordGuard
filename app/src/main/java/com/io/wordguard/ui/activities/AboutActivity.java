@@ -24,6 +24,7 @@ import com.io.wordguard.R;
 import com.io.wordguard.ui.util.URLSpanNoUnderline;
 
 public class AboutActivity extends BaseActivity {
+
     private static final String KEY_SCROLL_X = "KEY_SCROLL_X";
     private static final String KEY_SCROLL_Y = "KEY_SCROLL_Y";
     private ScrollView mScrollView;
