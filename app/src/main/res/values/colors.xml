@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Relax palettes-->
+    <!-- Relax palette-->
     <color name="colorGreen">#8eb9a8</color>
     <color name="colorYellow">#fefbd0</color>
     <color name="colorOrange">#fdcfb7</color>
-    <color name="colorRed">#f4828c</color>
+    <color name="colorRed">#f48284</color>
+    <color name="colorRedDark">#e66567</color>
     <color name="colorBrown">#775c6a</color>
+    <color name="colorBlue">#7c99bb</color>
 
-    <color name="colorPrimary">#4CAF50</color>
-    <color name="colorPrimaryDark">#388E3C</color>
-    <color name="colorAccent">#009688</color>
+    <color name="colorPrimary">@color/colorRed</color>
+    <color name="colorPrimaryDark">@color/colorRedDark</color>
+    <color name="colorAccent">@color/colorBlue</color>
 
     <!--Material Design Color Parameters-->
     <color name="primary_text_color">@color/material_light_primary_text</color>
@@ -32,4 +34,6 @@
     <color name="info_headline_scrim">#40000000</color>
     <color name="swipe_done_green">#0F9D58</color>
     <color name="swipe_delete_red">#D23F31</color>
+
+    <color name="word_list_divider_color">#B0BEC5</color>
 </resources>

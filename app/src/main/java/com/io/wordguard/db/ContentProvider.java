@@ -31,11 +31,11 @@ public class ContentProvider {
         if (allWords != null && allWords.size() > 0) callback.onFinish(allWords, null, null);
         else {
             Word.findByColumnInBackground(true, Word.COL_STATUS, Word.STATUS_ACTIVE, Word.COL_DEAD_LINE,
-                    context, Word.class, new FindAllCallback() {
+                    context, Word.class, new FindAllCallback<Word>() {
                         @Override
-                        public void onFinish(ArrayList<? extends DBObject> data, Object extra, Exception e) {
+                        public void onFinish(ArrayList<Word> data, Object extra, Exception e) {
                             if (e == null) {
-                                allWords = (ArrayList<Word>) data;
+                                allWords = data;
                                 callback.onFinish(allWords, null, null);
                             } else callback.onFinish(null, null, e);
                         }
@@ -49,11 +49,11 @@ public class ContentProvider {
             Word.queryInBackground(Word.class, context, true,
                     new String[]{Word.COL_TYPE, Word.COL_STATUS},
                     new String[]{String.valueOf(Word.TYPE_PRIVATE), String.valueOf(Word.STATUS_ACTIVE)},
-                    Word.COL_DEAD_LINE, new FindAllCallback() {
+                    Word.COL_DEAD_LINE, new FindAllCallback<Word>() {
                         @Override
-                        public void onFinish(ArrayList<? extends DBObject> data, Object extra, Exception e) {
+                        public void onFinish(ArrayList<Word> data, Object extra, Exception e) {
                             if (e == null) {
-                                privateWords = (ArrayList<Word>) data;
+                                privateWords = data;
                                 callback.onFinish(privateWords, null, null);
                             } else callback.onFinish(null, null, e);
                         }
@@ -67,11 +67,11 @@ public class ContentProvider {
             Word.queryInBackground(Word.class, context, true,
                     new String[]{Word.COL_TYPE, Word.COL_STATUS},
                     new String[]{String.valueOf(Word.TYPE_PUBLIC), String.valueOf(Word.STATUS_ACTIVE)},
-                    Word.COL_DEAD_LINE, new FindAllCallback() {
+                    Word.COL_DEAD_LINE, new FindAllCallback<Word>() {
                         @Override
-                        public void onFinish(ArrayList<? extends DBObject> data, Object extra, Exception e) {
+                        public void onFinish(ArrayList<Word> data, Object extra, Exception e) {
                             if (e == null) {
-                                publicWords = (ArrayList<Word>) data;
+                                publicWords = data;
                                 callback.onFinish(publicWords, null, null);
                             } else callback.onFinish(null, null, e);
                         }
@@ -83,11 +83,11 @@ public class ContentProvider {
         if (doneWords != null && doneWords.size() > 0) callback.onFinish(doneWords, null, null);
         else {
             Word.findByColumnInBackground(true, Word.COL_STATUS, Word.STATUS_DONE, Word.COL_DEAD_LINE,
-                    context, Word.class, new FindAllCallback() {
+                    context, Word.class, new FindAllCallback<Word>() {
                         @Override
-                        public void onFinish(ArrayList<? extends DBObject> data, Object extra, Exception e) {
+                        public void onFinish(ArrayList<Word> data, Object extra, Exception e) {
                             if (e == null) {
-                                doneWords = (ArrayList<Word>) data;
+                                doneWords = data;
                                 callback.onFinish(doneWords, null, null);
                             } else callback.onFinish(null, null, e);
                         }
@@ -99,11 +99,11 @@ public class ContentProvider {
         if (trashedWords != null && trashedWords.size() > 0) callback.onFinish(trashedWords, null, null);
         else {
             Word.findByColumnInBackground(true, Word.COL_STATUS, Word.STATUS_TRASH, Word.COL_DEAD_LINE,
-                    context, Word.class, new FindAllCallback() {
+                    context, Word.class, new FindAllCallback<Word>() {
                         @Override
-                        public void onFinish(ArrayList<? extends DBObject> data, Object extra, Exception e) {
+                        public void onFinish(ArrayList<Word> data, Object extra, Exception e) {
                             if (e == null) {
-                                trashedWords = (ArrayList<Word>) data;
+                                trashedWords = data;
                                 callback.onFinish(trashedWords, null, null);
                             } else callback.onFinish(null, null, e);
                         }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_all"
+        android:enabled="true"
+        android:icon="@drawable/ic_all_inclusive_24dp"
+        android:title="@string/all"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_talk"
+        android:enabled="true"
+        android:icon="@drawable/ic_call"
+        android:title="@string/talk"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_do"
+        android:enabled="true"
+        android:icon="@drawable/ic_assignment_turned_in_24dp"
+        android:title="@string/todo"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_be"
+        android:enabled="true"
+        android:icon="@drawable/ic_event_seat_24dp"
+        android:title="@string/to_be"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_return"
+        android:enabled="true"
+        android:icon="@drawable/ic_reply_24dp"
+        android:title="@string/to_return"
+        app:showAsAction="ifRoom" />
+
+    <!--<item-->
+        <!--android:id="@+id/action_myself"-->
+        <!--android:enabled="true"-->
+        <!--android:icon="@drawable/ic_account_circle_24dp"-->
+        <!--android:title="@string/to_myself"-->
+        <!--app:showAsAction="ifRoom" />-->
+
+</menu>
