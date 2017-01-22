@@ -13,7 +13,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 public class SwipeableRecycleView extends RecyclerView {
-    interface OnSwipeActionListener {
+    public interface OnSwipeActionListener {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({LEFT, RIGHT})
         @interface SwipeDirection {
@@ -27,6 +27,11 @@ public class SwipeableRecycleView extends RecyclerView {
 
     OnSwipeActionListener listener;
 
+    public void setSwipeListener(OnSwipeActionListener swipeListener) {
+        listener = swipeListener;
+    }
+
+
     public SwipeableRecycleView(Context context) {
         super(context);
         setupSwipeGesture();
@@ -34,10 +39,12 @@ public class SwipeableRecycleView extends RecyclerView {
 
     public SwipeableRecycleView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        setupSwipeGesture();
     }
 
     public SwipeableRecycleView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        setupSwipeGesture();
     }
 
     private void setupSwipeGesture() {
