@@ -43,7 +43,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            app:itemBackground="@color/colorAccent"
+            app:itemBackground="@color/colorPrimaryDark"
             app:itemIconTint="@android:color/white"
             app:itemTextColor="@android:color/white"
             app:menu="@menu/bottom_navigation_main"

@@ -50,11 +50,11 @@ public class WordListFragment extends Fragment {
         mRecyclerView.setSwipeListener(new SwipeableRecycleView.OnSwipeActionListener() {
             @Override
             public void onSwipe(int position, @SwipeDirection int direction) {
-                Log.d(TAG, "Swipe " + direction);
+                mAdapter.removeItemAt(position);
             }
         });
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new WordListRecyclerAdapter(new ArrayList<Word>());
+        mAdapter = new WordListRecyclerAdapter(new ArrayList<Word>(), getActivity());
         mRecyclerView.setAdapter(mAdapter);
 
         return rootView;

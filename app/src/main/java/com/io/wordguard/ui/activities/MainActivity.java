@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,7 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 import com.io.wordguard.BaseActivity;
 import com.io.wordguard.R;
 import com.io.wordguard.ui.fragments.WordListFragment;
@@ -27,7 +24,6 @@ public class MainActivity extends BaseActivity
     private static final String PREV_TITLE = "title";
     public static boolean needRecreate = false;
     private BottomNavigationView mBottomNavigationView;
-    private FrameLayout mContentHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,7 +124,7 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.nav_describe_problem) {
             startActivity(new Intent(this, DescribeProblemActivity.class));
         } else if (id == R.id.nav_about) {
-            startActivity(new Intent(this, ViewWordActivity.class));
+            startActivity(new Intent(this, AboutActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

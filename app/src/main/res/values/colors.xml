@@ -9,8 +9,8 @@
     <color name="colorBrown">#775c6a</color>
     <color name="colorBlue">#7c99bb</color>
 
-    <color name="colorPrimary">@color/colorRed</color>
-    <color name="colorPrimaryDark">@color/colorRedDark</color>
+    <color name="colorPrimary">@color/colorRedDark</color>
+    <color name="colorPrimaryDark">@color/colorBrown</color>
     <color name="colorAccent">@color/colorBlue</color>
 
     <!--Material Design Color Parameters-->

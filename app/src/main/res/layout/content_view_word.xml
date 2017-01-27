@@ -9,16 +9,48 @@
     tools:context=".ui.activities.ViewWordActivity"
     tools:showIn="@layout/activity_view_word">
 
-    <android.support.v7.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:animateLayoutChanges="true">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:text="@string/large_text" />
-    </android.support.v7.widget.CardView>
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:minHeight="100dp"
+            android:transitionName="@string/transition_word_view_string"
+            tools:targetApi="lollipop"/>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:minHeight="100dp"
+            tools:targetApi="lollipop"
+            android:foreground="@color/colorBlue"/>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:minHeight="200dp"
+            tools:targetApi="lollipop"
+            android:foreground="@color/colorOrange"/>
+
+    </LinearLayout>
+
+
+    <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="@dimen/text_margin"-->
+            <!--android:text="@string/large_text" />-->
 </android.support.v4.widget.NestedScrollView>
