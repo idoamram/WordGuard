@@ -83,6 +83,7 @@ public class MainActivity extends BaseActivity
             // If drawer is opened, close it
             mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
+            onBackPressed();
             //TODO Drawer is closed, check if current fragment is (( ? )) fragment, and change to it if it's not
         }
     }
