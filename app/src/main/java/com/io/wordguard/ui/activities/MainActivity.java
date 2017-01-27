@@ -128,7 +128,7 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.nav_describe_problem) {
             startActivity(new Intent(this, DescribeProblemActivity.class));
         } else if (id == R.id.nav_about) {
-            startActivity(new Intent(this, AboutActivity.class));
+            startActivity(new Intent(this, ViewWordActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
