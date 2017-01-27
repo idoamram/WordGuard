@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.Toast;
+
 import com.io.wordguard.BaseActivity;
 import com.io.wordguard.R;
 import com.io.wordguard.ui.fragments.WordListFragment;
@@ -83,8 +86,14 @@ public class MainActivity extends BaseActivity
             // If drawer is opened, close it
             mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            onBackPressed();
             //TODO Drawer is closed, check if current fragment is (( ? )) fragment, and change to it if it's not
+            long currentTime = System.currentTimeMillis();
+            if (currentTime - lastPress > 3000) {
+                Toast.makeText(this, R.string.confirm_exit, Toast.LENGTH_SHORT).show();
+                lastPress = currentTime;
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 
