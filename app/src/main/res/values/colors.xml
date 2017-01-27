@@ -9,9 +9,9 @@
     <color name="colorBrown">#775c6a</color>
     <color name="colorBlue">#7c99bb</color>
 
-    <color name="colorPrimary">@color/colorRedDark</color>
-    <color name="colorPrimaryDark">@color/colorBrown</color>
-    <color name="colorAccent">@color/colorBlue</color>
+    <color name="colorPrimary">@color/quantum_blue_500</color>
+    <color name="colorPrimaryDark">@color/quantum_blue_700</color>
+    <color name="colorAccent">@color/quantum_red_500</color>
 
     <!--Material Design Color Parameters-->
     <color name="primary_text_color">@color/material_light_primary_text</color>
