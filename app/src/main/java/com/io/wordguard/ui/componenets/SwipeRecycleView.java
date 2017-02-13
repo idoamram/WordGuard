@@ -12,7 +12,7 @@ import com.io.wordguard.ui.adapters.WordListRecyclerAdapter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-public class SwipeableRecycleView extends RecyclerView {
+public class SwipeRecycleView extends RecyclerView {
     public interface OnSwipeActionListener {
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({LEFT, RIGHT})
@@ -32,17 +32,17 @@ public class SwipeableRecycleView extends RecyclerView {
     }
 
 
-    public SwipeableRecycleView(Context context) {
+    public SwipeRecycleView(Context context) {
         super(context);
         setupSwipeGesture();
     }
 
-    public SwipeableRecycleView(Context context, @Nullable AttributeSet attrs) {
+    public SwipeRecycleView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         setupSwipeGesture();
     }
 
-    public SwipeableRecycleView(Context context, @Nullable AttributeSet attrs, int defStyle) {
+    public SwipeRecycleView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         setupSwipeGesture();
     }

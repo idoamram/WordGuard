@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,12 +15,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.io.wordguard.BaseActivity;
 import com.io.wordguard.R;
 import com.io.wordguard.ui.fragments.WordListFragment;
+import com.io.wordguard.ui.util.RevealAnimationSetting;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -52,6 +57,29 @@ public class MainActivity extends BaseActivity
             //TODO No data saved, select the default drawer item (( ? ))
         }
 
+        final View contentRootView = findViewById(R.id.contentRootView);
+        final FloatingActionButton addFab = (FloatingActionButton) findViewById(R.id.add_fab);
+        addFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RevealAnimationSetting revealAnimationSetting = RevealAnimationSetting.with(
+                        (int) (addFab.getX() + addFab.getWidth() / 2),
+                        (int) (addFab.getY() + addFab.getHeight() / 2),
+                        contentRootView.getWidth(),
+                        contentRootView.getHeight());
+                Intent startIntent = CreateWordActivity.getStartIntent(MainActivity.this, revealAnimationSetting);
+                String transitionName = MainActivity.this.getString(R.string.transition_create_word_fab);
+
+                // Define the view that the animation will start from
+                ActivityOptionsCompat options =
+
+                        ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this,
+                                addFab,   // Starting view
+                                transitionName    // The String
+                        );
+                ActivityCompat.startActivity(MainActivity.this, startIntent, options.toBundle());
+            }
+        });
         mBottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

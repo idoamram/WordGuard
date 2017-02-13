@@ -31,17 +31,15 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
-            android:minHeight="100dp"
+            android:minHeight="160dp"
             tools:targetApi="lollipop"
             android:foreground="@color/colorBlue"/>
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:minHeight="200dp"
+            android:layout_margin="8dp"
+            android:minHeight="500dp"
             tools:targetApi="lollipop"
             android:foreground="@color/colorOrange"/>
 

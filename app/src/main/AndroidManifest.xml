@@ -74,6 +74,9 @@
         <meta-data
             android:name="ENTITIES_CLASSES_NAME"
             android:value="com.io.wordguard.word.Word" />
+
+        <activity android:name=".ui.activities.CreateWordActivity"
+            android:theme="@style/NoAnimThemeNoActionBar"/>
     </application>
 
 </manifest>

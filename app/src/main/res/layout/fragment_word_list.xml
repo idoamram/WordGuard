@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context="com.io.wordguard.ui.fragments.WordListFragment">
 
-    <com.io.wordguard.ui.componenets.SwipeableRecycleView
+    <com.io.wordguard.ui.componenets.SwipeRecycleView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

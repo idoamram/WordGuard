@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.activities.MainActivity"
-    android:id="@+id/contentRootView">
+    tools:context=".ui.activities.CreateWordActivity"
+    android:id="@+id/rootView">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appBar"
@@ -29,34 +29,16 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <FrameLayout
-            android:id="@+id/content_frame"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/bottom_navigation"
-            android:layout_below="@id/appBar" />
-
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/add_fab"
+            android:id="@+id/done_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:useCompatPadding="true"
-            android:layout_above="@+id/bottom_navigation"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            app:srcCompat="@drawable/ic_add"
+            app:srcCompat="@drawable/ic_done"
             android:tint="@color/quantum_white_100"
-            android:transitionName="@string/transition_create_word_fab"/>
-
-        <android.support.design.widget.BottomNavigationView
-            android:id="@+id/bottom_navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            app:itemBackground="@color/colorPrimaryDark"
-            app:itemIconTint="@android:color/white"
-            app:itemTextColor="@android:color/white"
-            app:menu="@menu/bottom_navigation_main" />
+            android:layout_centerHorizontal="true"
+            android:transitionName="@string/transition_create_word_fab"/>
 
     </RelativeLayout>
 
