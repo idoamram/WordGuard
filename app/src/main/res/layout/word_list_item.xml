@@ -1,137 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    android:id="@+id/rootView"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootView"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
+    android:layout_height="?android:attr/listPreferredItemHeightLarge"
     android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
     android:transitionName="@string/transition_word_view_string">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/left_image"
             android:layout_width="96dp"
-            android:layout_height="wrap_content"
-            android:background="@color/swipe_done_green"
-            android:layout_alignParentStart="true"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@+id/content_root"
             android:layout_alignParentLeft="true"
-            app:srcCompat="@drawable/ic_done_white"
-            android:scaleType="centerInside"
-            android:tint="@android:color/white"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_alignBottom="@+id/content_root" />
+            android:background="@color/swipe_done_green"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_done_white" />
 
         <ImageView
             android:id="@+id/right_image"
             android:layout_width="96dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@+id/content_root"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/ic_delete_white"
-            android:background="@color/swipe_delete_red"
             android:layout_alignParentTop="true"
-            android:layout_alignBottom="@+id/content_root" />
+            android:background="@color/swipe_delete_red"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_delete_white" />
 
         <RelativeLayout
-            android:background="@android:color/white"
             android:id="@+id/content_root"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:layout_height="match_parent"
+            android:background="@color/cards_and_dialogs_color"
+            android:gravity="center">
 
-            <LinearLayout
-                android:id="@+id/title_and_desc_root"
+            <View
+                android:id="@+id/word_recycler_category_color"
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="#3367D6"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/word_recycler_item_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:layout_alignParentTop="true"
-                android:layout_toStartOf="@+id/action_button"
-                android:layout_toLeftOf="@+id/action_button"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp" >
+                android:layout_toEndOf="@+id/word_recycler_category_color"
+                android:layout_toStartOf="@+id/word_recycler_item_call_button"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingStart="@dimen/spacing_normal"
+                android:paddingTop="@dimen/spacing_normal"
+                android:text="This is the title"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="?android:textColorPrimary" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="This is the title"
-                    android:maxLines="3"
-                    android:ellipsize="end"
-                    android:textColor="@android:color/black"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            <TextView
+                android:id="@+id/word_recycler_item_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/word_recycler_item_title"
+                android:layout_toEndOf="@+id/word_recycler_category_color"
+                android:layout_toStartOf="@+id/word_recycler_item_call_button"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingStart="@dimen/spacing_normal"
+                android:paddingTop="@dimen/spacing_micro"
+                android:text="This is the description"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="16sp"
+                android:visibility="gone" />
 
-            </LinearLayout>
-
-            <ImageButton
-                android:id="@+id/action_button"
+            <TextView
+                android:id="@+id/word_recycler_item_deadline_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_call"
-                android:tint="@color/colorBlue"
-                android:background="?attr/selectableItemBackground"
-                android:layout_alignBottom="@+id/title_and_desc_root"
-                android:layout_alignTop="@+id/title_and_desc_root"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"/>
+                android:layout_below="@+id/word_recycler_item_description"
+                android:layout_toEndOf="@+id/word_recycler_category_color"
+                android:drawablePadding="@dimen/spacing_micro"
+                android:drawableStart="@drawable/ic_time_18dp"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:paddingBottom="@dimen/spacing_normal"
+                android:paddingStart="@dimen/spacing_normal"
+                android:paddingTop="@dimen/spacing_normal"
+                android:text="08:00"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="?android:textColorSecondary" />
 
-            <LinearLayout
-                android:id="@+id/details_root"
-                android:layout_below="@+id/title_and_desc_root"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/word_recycler_item_deadline_date"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="16dp"
-                android:gravity="center_vertical">
+                android:layout_below="@+id/word_recycler_item_description"
+                android:layout_toEndOf="@+id/word_recycler_item_deadline_time"
+                android:drawablePadding="@dimen/spacing_micro"
+                android:drawableStart="@drawable/ic_calendar_18dp"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:paddingBottom="@dimen/spacing_normal"
+                android:paddingStart="@dimen/spacing_normal"
+                android:paddingTop="@dimen/spacing_normal"
+                android:text="1/1/2017"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="?android:textColorSecondary" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="21/02"
-                    android:drawableStart="@drawable/ic_calendar_18dp"
-                    android:drawableLeft="@drawable/ic_calendar_18dp"
-                    android:drawablePadding="4dp"
-                    android:gravity="center_vertical" />
+            <TextView
+                android:id="@+id/word_recycler_item_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/word_recycler_item_description"
+                android:layout_toEndOf="@+id/word_recycler_item_deadline_date"
+                android:layout_toStartOf="@+id/word_recycler_item_call_button"
+                android:drawablePadding="@dimen/spacing_micro"
+                android:drawableStart="@drawable/ic_location_18dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:paddingBottom="@dimen/spacing_normal"
+                android:paddingStart="@dimen/spacing_normal"
+                android:paddingTop="@dimen/spacing_normal"
+                android:text="Tel-Aviv"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="?android:textColorSecondary" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="18:00"
-                    android:drawableStart="@drawable/ic_time_18dp"
-                    android:drawableLeft="@drawable/ic_time_18dp"
-                    android:drawablePadding="4dp"
-                    android:gravity="center_vertical" />
+            <ImageButton
+                android:id="@+id/word_recycler_item_call_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/word_recycler_item_divider"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/spacing_micro"
+                android:background="?selectableItemBackgroundBorderless"
+                android:contentDescription="@null"
+                android:padding="@dimen/spacing_normal"
+                android:tint="@color/active_icon_color"
+                app:srcCompat="@drawable/ic_call" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Tel Aviv"
-                    android:drawableStart="@drawable/ic_location_18dp"
-                    android:drawableLeft="@drawable/ic_location_18dp"
-                    android:drawablePadding="4dp"
-                    android:gravity="center_vertical" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Donald Trump"
-                    android:drawableStart="@drawable/ic_person_18dp"
-                    android:drawableLeft="@drawable/ic_person_18dp"
-                    android:drawablePadding="4dp"
-                    android:gravity="center_vertical" />
-            </LinearLayout>
+            <View
+                android:id="@+id/word_recycler_item_divider"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_below="@+id/word_recycler_item_location"
+                android:background="@color/divider_color" />
         </RelativeLayout>
-
-
     </RelativeLayout>
 </android.support.v7.widget.CardView>

@@ -12,45 +12,225 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:animateLayoutChanges="true">
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:minHeight="100dp"
+            android:background="?selectableItemBackground"
+            android:minHeight="?android:attr/listPreferredItemHeightLarge"
             android:transitionName="@string/transition_word_view_string"
-            tools:targetApi="lollipop"/>
+            app:cardUseCompatPadding="true"
+            tools:targetApi="lollipop">
+
+            <RelativeLayout
+                android:id="@+id/word_view_title_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
+
+                <TextView
+                    android:id="@+id/word_view_title_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp"
+                    android:text="this is the title"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="?android:textColorPrimary"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:minHeight="100dp"
-            tools:targetApi="lollipop"
-            android:foreground="@color/colorBlue"/>
+            android:background="?selectableItemBackground"
+            android:minHeight="?android:attr/listPreferredItemHeightLarge"
+            app:cardUseCompatPadding="true">
+
+            <RelativeLayout
+                android:id="@+id/word_view_description_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
+
+                <TextView
+                    android:id="@+id/word_view_description_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp"
+                    android:text="this is the description"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="?android:textColorPrimary" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:minHeight="200dp"
-            tools:targetApi="lollipop"
-            android:foreground="@color/colorOrange"/>
+            android:background="?selectableItemBackground"
+            android:minHeight="?android:attr/listPreferredItemHeightLarge"
+            app:cardUseCompatPadding="true">
 
+            <RelativeLayout
+                android:id="@+id/word_view_deadline_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
+
+                <ImageView
+                    android:id="@+id/word_view_deadline_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    app:srcCompat="@drawable/ic_calendar" />
+
+                <TextView
+                    android:id="@+id/word_view_deadline_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/word_view_deadline_icon"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:text="this it the deadline"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="?android:textColorPrimary" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:minHeight="?android:attr/listPreferredItemHeightLarge"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/word_view_location_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin">
+
+                    <ImageView
+                        android:id="@+id/word_view_location_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:contentDescription="@null"
+                        app:srcCompat="@drawable/ic_location" />
+
+                    <TextView
+                        android:id="@+id/word_view_location_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/word_view_location_icon"
+                        android:gravity="center_vertical"
+                        android:minHeight="48dp"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:text="this is the location"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="?android:textColorPrimary" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/word_view_location_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@null"
+                    android:scaleType="centerCrop"
+                    android:tint="@color/info_headline_scrim"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:minHeight="?android:attr/listPreferredItemHeightLarge"
+            app:cardUseCompatPadding="true">
+
+            <RelativeLayout
+                android:id="@+id/word_view_contact_name_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
+
+                <ImageView
+                    android:id="@+id/word_view_contact_details_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    app:srcCompat="@drawable/ic_contact" />
+
+                <TextView
+                    android:id="@+id/word_view_contact_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@+id/word_view_contact_details_icon"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:text="Or Ego"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="?android:textColorPrimary" />
+
+                <TextView
+                    android:id="@+id/word_view_contact_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/word_view_contact_name"
+                    android:layout_toEndOf="@+id/word_view_contact_details_icon"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:text="+925-545-277-194"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="?android:textColorPrimary" />
+
+                <TextView
+                    android:id="@+id/word_view_contact_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/word_view_contact_number"
+                    android:layout_toEndOf="@+id/word_view_contact_details_icon"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:text="orego@gmail.com"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="?android:textColorPrimary" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
     </LinearLayout>
 
-
-    <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_margin="@dimen/text_margin"-->
-            <!--android:text="@string/large_text" />-->
 </android.support.v4.widget.NestedScrollView>
