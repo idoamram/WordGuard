@@ -221,4 +221,10 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="transition_create_word_fab">create_word_fab_transition</string>
+    <string-array name="create_word_spinner_type_entries">
+        <item>Talk</item>
+        <item>Do</item>
+        <item>Be</item>
+        <item>Return</item>
+    </string-array>
 </resources>

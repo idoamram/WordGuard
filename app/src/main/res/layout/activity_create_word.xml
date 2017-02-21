@@ -9,9 +9,10 @@
     tools:context=".ui.activities.CreateWordActivity"
     android:id="@+id/rootView">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appBar"
@@ -25,21 +26,13 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 app:layout_scrollFlags="enterAlways|scroll|snap"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:title="Create Word" />
 
         </android.support.design.widget.AppBarLayout>
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/done_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:useCompatPadding="true"
-            app:srcCompat="@drawable/ic_done"
-            android:tint="@color/quantum_white_100"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:transitionName="@string/transition_create_word_fab"/>
+        <include layout="@layout/activity_create_word_content" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

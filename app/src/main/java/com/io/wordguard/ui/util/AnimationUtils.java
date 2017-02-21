@@ -23,7 +23,7 @@ public class AnimationUtils {
 
     private static int getDuration(Context context) {
         int duration;
-        duration = context.getResources().getInteger(android.R.integer.config_longAnimTime) * 2;
+        duration = context.getResources().getInteger(android.R.integer.config_longAnimTime);
         return duration;
     }
 
@@ -119,14 +119,14 @@ public class AnimationUtils {
                                                        AnimationFinishedListener listener) {
         registerCircularRevealAnimation(context, view, revealSettings,
                 getColor(context, R.color.colorPrimary),
-                getColor(context, R.color.quantum_white_100), listener);
+                getColor(context, android.R.color.transparent), listener);
     }
 
     public static void startCircularRevealExitAnimation(Context context, View view,
                                                         RevealAnimationSetting revealSettings,
                                                         AnimationFinishedListener listener) {
         startCircularRevealExitAnimation(context, view, revealSettings,
-                getColor(context, R.color.quantum_white_100),
+                getColor(context, android.R.color.transparent),
                 getColor(context, R.color.colorPrimary), listener);
     }
 }
